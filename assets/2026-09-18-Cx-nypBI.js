@@ -91,7 +91,17 @@ Write the directional derivative with the angle $\\theta$ between $\\nabla f$ an
 $$D_{\\mathbf u} f = \\nabla f \\cdot \\mathbf u = \\lVert \\nabla f \\rVert\\,\\lVert \\mathbf u \\rVert \\cos\\theta = \\lVert \\nabla f \\rVert \\cos\\theta.$$
 Since $\\cos\\theta$ is between $-1$ and $1$, this one formula answers today's question.
 +++
-**The hiking picture.** Think of $f$ as height on a hillside. At each spot, the gradient is the arrow pointing straight uphill, and its length is how steep that uphill is. Walking at an angle to it ($\\cos\\theta < 1$) is less steep. Walking sideways ($\\theta = 90°$) keeps you level, and walking straight downhill ($\\theta = 180°$) is the steepest descent.
+**Checking it with real numbers.** Take $f = x^2 y$ at $(1, 2)$, where $\\nabla f = \\langle 4, 1 \\rangle$ and $\\lVert \\nabla f \\rVert = \\sqrt{17} \\approx 4.12$. Move a distance $0.01$ in five different unit directions and compare how much $f$ actually changes:
+
+| direction $\\mathbf u$ | angle $\\theta$ from $\\nabla f$ | $D_{\\mathbf u} f = 4.12\\cos\\theta$ | actual change in $f$ |
+|---|---|---|---|
+| $\\tfrac{1}{\\sqrt{17}}\\langle 4, 1 \\rangle$, same as $\\nabla f$ | $0°$ | $4.12$ | $+0.0415$ |
+| $\\langle 1, 0 \\rangle$ | $14°$ | $4.00$ | $+0.0402$ |
+| $\\langle 0, 1 \\rangle$ | $76°$ | $1.00$ | $+0.0100$ |
+| $\\tfrac{1}{\\sqrt{17}}\\langle -1, 4 \\rangle$, perpendicular | $90°$ | $0$ | about $0$ |
+| $\\tfrac{1}{\\sqrt{17}}\\langle -4, -1 \\rangle$, opposite | $180°$ | $-4.12$ | $-0.0410$ |
+
+Each actual change is close to $D_{\\mathbf u} f \\times 0.01$. The direction of $\\nabla f$ gives the biggest increase, the perpendicular direction leaves $f$ almost unchanged, and the opposite direction gives the biggest decrease.
 
 **Why the maximum is $\\lVert \\nabla f \\rVert$.** The largest $\\cos\\theta$ can be is $1$, at $\\theta = 0$, which means $\\mathbf u$ points the same way as $\\nabla f$. No other direction can beat it.
 :::

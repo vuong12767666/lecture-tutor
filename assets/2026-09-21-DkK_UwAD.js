@@ -58,7 +58,7 @@ $x + y + z = 5$ passes through the point but has the wrong normal. $2x + 4y + 4z
 :::
 
 :::idea Where the gradient is zero
-At the top of a smooth hill there's no uphill direction, so $\\nabla f$ must be $\\mathbf 0$. That gives the first rule of optimization:
+Suppose $f$ has a local max at a point $P$ inside its domain. Moving away from $P$ in any direction can't increase $f$, so $D_{\\mathbf u} f(P) = \\nabla f(P) \\cdot \\mathbf u \\le 0$ for every unit vector $\\mathbf u$. Using both $\\mathbf u$ and $-\\mathbf u$ gives $\\nabla f(P) \\cdot \\mathbf u \\le 0$ and $\\nabla f(P) \\cdot \\mathbf u \\ge 0$, so $\\nabla f(P) \\cdot \\mathbf u = 0$ for every $\\mathbf u$. The only vector with that property is $\\mathbf 0$. (A local min works the same way.) That gives the first rule of optimization:
 
 A [[critical point]] is where $\\nabla f = \\mathbf 0$ (or a partial derivative doesn't exist). **Local maxima and minima can only happen at critical points.**
 

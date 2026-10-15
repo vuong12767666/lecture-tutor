@@ -107,7 +107,7 @@ review: 2026-09-18 Gradients and level curves; 2026-09-25 Critical points; 2026-
 **What to recognize.** Read the map with these facts:
 - $\\nabla f$ is perpendicular to the level curves and points toward bigger labels.
 - $\\lVert \\nabla f \\rVert$ is large where the level curves are close together.
-- **Max or min:** the level curves form **rings inside rings** around one point, like a target. The point in the middle is a min if the labels get smaller toward it (a max if they get bigger).
+- **Max or min:** the level curves form **rings inside rings** around one point (closed loops, one inside another). The point in the middle is a min if the labels get smaller toward it (a max if they get bigger).
 - **Saddle:** one level curve **crosses itself**, making an X shape. The crossing point is the saddle.
 
 (The map shows $f = (x^2 - 1)^2 + y^2$.)

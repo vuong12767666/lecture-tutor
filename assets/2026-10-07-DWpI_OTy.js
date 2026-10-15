@@ -55,7 +55,7 @@ $x - y = 1 - 2 = -1$ and $xy = 1 \\cdot 2 = 2$, so $\\mathbf F(1,2) = \\langle -
 :::idea Flowlines
 A [[flowline]] (also called a streamline or integral curve) is a path that **follows the arrows**: at every moment its velocity equals the field there,
 $$\\mathbf r'(t) = \\mathbf F(\\mathbf r(t)).$$
-Picture dropping a cork in a stream: the cork's path is a flowline of the water's velocity field.
+For example, $\\mathbf F = \\langle -y, x \\rangle$ at $(1, 0)$ is $\\langle 0, 1 \\rangle$, so a flowline passing through $(1, 0)$ is moving straight up at that moment, at speed $1$.
 
 **Checking a proposed flowline:** compute $\\mathbf r'(t)$, compute $\\mathbf F(\\mathbf r(t))$, and check they're equal for **every** $t$.
 +++

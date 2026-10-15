@@ -55,7 +55,7 @@ $$\\frac{d}{dt} f(\\mathbf r(t)) = \\nabla f(\\mathbf r(t)) \\cdot \\mathbf r'(t
 That's exactly the integrand of the line integral! So by the ordinary Fundamental Theorem of Calculus,
 $$\\int_C \\nabla f \\cdot d\\mathbf r = \\int_a^b \\frac{d}{dt} f(\\mathbf r(t))\\, dt = f(\\mathbf r(b)) - f(\\mathbf r(a)).$$
 +++
-**The physics.** Gravity is the gradient of a function, so it's [[conservative]]. The work gravity does depends only on where you start and end, not the route: hiking up a switchback trail or straight up a cliff, gravity does the same work. The potential energy is $-f$, and work equals the drop in potential energy.
+**A physics example.** Near Earth's surface, gravity on a 1 kg mass is $\\mathbf F = \\langle 0, 0, -9.8 \\rangle$ newtons, which is $\\nabla(-9.8z)$, so it's [[conservative]]. Rising from height $0$ to height $10$ m, gravity does work $f(\\text{end}) - f(\\text{start}) = -9.8 \\cdot 10 - 0 = -98$ joules along **any** path. Computing it directly gives $-98$ for a path straight up, for a path that circles $5$ times at radius $20$ m while rising, and for a path that dips below the start first.
 
 **What you need.** $\\mathbf F$ must be $\\nabla f$ on a region containing the whole path, and $f$ must be differentiable there. Next lecture (Oct 12) covers how to tell whether a given $\\mathbf F$ is a gradient.
 :::

@@ -21,9 +21,8 @@ Arc length adds up tiny pieces of length $ds$. What if each piece carries a valu
 :::
 
 :::idea Arc length, again
-Think of a curve as made of tiny pieces. A piece traced in time $dt$ has length
-$$ds = \\lVert \\mathbf r'(t) \\rVert\\, dt,$$
-and adding up all the pieces gives the length.
+Split the time interval into short steps of length $\\Delta t$. During one step the particle moves about (speed) $\\times$ (time) $= \\lVert \\mathbf r'(t) \\rVert\\, \\Delta t$. Adding those distances and letting $\\Delta t \\to 0$ gives the length. So the length element is
+$$ds = \\lVert \\mathbf r'(t) \\rVert\\, dt.$$
 
 **The answer doesn't depend on how you trace the curve.** The segment from $(0,0)$ to $(3,4)$ can also be traced as $\\langle 3t^2, 4t^2 \\rangle$, $0 \\le t \\le 1$. Now $\\lVert \\mathbf r' \\rVert = \\lVert \\langle 6t, 8t \\rangle \\rVert = 10t$, and $\\int_0^1 10t\\, dt = 5$, the same answer.
 +++
@@ -51,7 +50,7 @@ $$\\int_C f\\, ds = \\int_a^b f(\\mathbf r(t))\\, \\lVert \\mathbf r'(t) \\rVert
 **Meanings:**
 - $f = 1$: the length of $C$.
 - $f$ = density: the **mass** of a wire shaped like $C$.
-- $f \\ge 0$ on a plane curve: the area of a "curtain" standing on $C$ with height $f$.
+- $f \\ge 0$ and $C$ in the $xy$-plane: the area of the vertical surface standing on $C$ whose height above each point $(x, y)$ of $C$ is $f(x, y)$.
 +++
 **Where the formula comes from.** Chop $C$ into pieces of length $\\Delta s_i$ and pick a point $P_i$ on each. Then $\\sum f(P_i)\\, \\Delta s_i$ approximates the total, and in the limit you get $\\int_C f\\, ds$. Changing to $t$: a piece traced in time $\\Delta t$ has length $\\Delta s \\approx \\lVert \\mathbf r'(t) \\rVert\\, \\Delta t$, which is why the speed shows up.
 

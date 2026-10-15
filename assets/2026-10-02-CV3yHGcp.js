@@ -130,7 +130,7 @@ For a particle at position $\\mathbf r(t)$:
 - **[[speed]]** $\\lVert \\mathbf v(t) \\rVert$, a number
 - **acceleration** $\\mathbf a(t) = \\mathbf v'(t) = \\mathbf r''(t)$, a vector
 +++
-**Constant speed doesn't mean zero acceleration.** Acceleration measures any change in velocity, including a change in *direction*. A car driving around a circle at a steady $30$ mph is accelerating toward the center the whole time. The example below shows this.
+**Constant speed doesn't mean zero acceleration.** Acceleration measures any change in velocity, including a change in *direction*. For example, $\\mathbf r(t) = \\langle \\cos t, \\sin t \\rangle$ has speed $\\lVert \\mathbf r'(t) \\rVert = 1$ at every time, but $\\mathbf a(t) = \\langle -\\cos t, -\\sin t \\rangle = -\\mathbf r(t)$, a vector of length $1$ pointing from the particle straight to the center. The example below shows the same thing on a helix.
 :::
 
 :::example Steady speed, turning

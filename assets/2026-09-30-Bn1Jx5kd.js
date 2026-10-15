@@ -25,7 +25,9 @@ How do you maximize $f$ when you're stuck on a curve $g = c$? And why do the gra
 :::
 
 :::idea Why the gradients line up
-Picture walking along the constraint curve $g = c$ while watching the value of $f$. At the highest point *along the curve*, stepping either way along the curve doesn't increase $f$, so the directional derivative of $f$ along the curve is $0$. That means $\\nabla f$ is **perpendicular to the curve**.
+Let $\\mathbf r(t)$ trace the constraint curve $g = c$, and say $f$ is largest along it at $\\mathbf r(t_0)$. Then the one-variable function $f(\\mathbf r(t))$ has its max at $t_0$, so its derivative is $0$ there. By the chain rule,
+$$\\frac{d}{dt} f(\\mathbf r(t)) = \\nabla f \\cdot \\mathbf r'(t) = 0 \\quad \\text{at } t_0.$$
+So $\\nabla f$ is **perpendicular to the curve's tangent** $\\mathbf r'(t_0)$.
 
 But $\\nabla g$ is also perpendicular to the curve, because the curve is a level curve of $g$. Two vectors perpendicular to the same curve at the same point are parallel:
 $$\\nabla f = \\lambda\\, \\nabla g.$$

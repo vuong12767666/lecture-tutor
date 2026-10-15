@@ -138,7 +138,7 @@ The contour map of a differentiable function $f$ is shown on the closed rectangl
 review: 2026-09-18 Gradients and level curves; 2026-09-25 Critical points; 2026-09-28 When must extremes exist?; 2026-10-09 The Fundamental Theorem for Line Integrals
 
 **How to read the map.**
-- **Max or min:** the level curves form **rings inside rings** around one point, like a target. It's a max if the labels get bigger toward the middle, a min if they get smaller.
+- **Max or min:** the level curves form **rings inside rings** around one point (closed loops, one inside another). It's a max if the labels get bigger toward the middle, a min if they get smaller.
 - **Saddle:** one level curve **crosses itself**, making an X shape. The crossing point is the saddle.
 - $\\nabla f$ is perpendicular to the level curves and points toward bigger labels.
 

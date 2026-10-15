@@ -15,7 +15,7 @@ Midterm 2 (Tue, Oct 20) covers three units. For any problem on it: which unit is
 | 2. Curves | §13.1–13.4 (early parts) | Oct 2 – Oct 5 | parametrize curves, find tangent lines, arc length, velocity, speed, and acceleration |
 | 3. Line integrals | §16.1–16.3 | Oct 5 – Oct 14 | compute $\\int_C f\\,ds$ and $\\int_C \\mathbf F \\cdot d\\mathbf r$, read vector-field pictures, check flowlines, test for conservative, find potentials |
 
-**The thread through all of it is the [[gradient]].** It points uphill (unit 1), it's perpendicular to level curves and surfaces (tangent planes), and a field that *is* a gradient makes line integrals easy (unit 3).
+**The thread through all of it is the [[gradient]].** It points in the direction $f$ increases fastest (unit 1), it's perpendicular to level curves and surfaces (tangent planes), and a field that *is* a gradient makes line integrals easy (unit 3).
 +++
 **How one question can use all three units.** A contour-map question might ask you to find the direction of $\\nabla f$ at a point (unit 1), count the critical points (unit 1), and evaluate $\\int_C \\nabla f \\cdot d\\mathbf r$ along a drawn curve (unit 3, by the Fundamental Theorem: just $f(\\text{end}) - f(\\text{start})$). Seeing which unit each part belongs to tells you which tool to reach for.
 :::

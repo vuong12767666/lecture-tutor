@@ -33,9 +33,9 @@ $$P_y = f_{xy} \\qquad Q_x = f_{yx}$$
 
 [[mixed partials|Mixed partials]] are equal (when they are continuous), so $P_y = Q_x$.
 
-**Intuition.** $P_y$ measures how the horizontal push changes as you move up. $Q_x$ measures how the vertical push changes as you move right. If they don't match, the field has a **twist**, meaning it tends to spin you around. Walk around a small loop and the field helps you more on one side than it pushes back on the other side, so you come out ahead. A gradient field can't do that, because going around a loop brings you back to the same height.
+**Why this condition makes sense.** The number $Q_x - P_y$ measures how much $\\mathbf F$ circulates around a point: for a small counterclockwise square of side $h$, $\\oint \\mathbf F \\cdot d\\mathbf r \\approx (Q_x - P_y)\\,h^2$ (Go deeper shows why). A gradient field gives $0$ around every closed loop, so for it $Q_x - P_y$ must be $0$. For example, $\\langle -y, x \\rangle$ has $Q_x - P_y = 1 - (-1) = 2$, and its integral around the unit square is exactly $2$, so it can't be a gradient.
 +++
-**Where the twist number comes from.** Walk counterclockwise around a tiny square with corner $(x,y)$ and side $h$, adding up $\\mathbf{F}\\cdot d\\mathbf{r}$ on each side:
+**Where $Q_x - P_y$ comes from.** Walk counterclockwise around a tiny square with corner $(x,y)$ and side $h$, adding up $\\mathbf{F}\\cdot d\\mathbf{r}$ on each side:
 
 - bottom (moving right): about $P(x,y)\\,h$
 - right side (moving up): about $Q(x+h,y)\\,h$
@@ -55,24 +55,24 @@ If $\\mathbf{F} = \\langle P, Q \\rangle$ is conservative and $P, Q$ have contin
 $$P_y = Q_x.$$
 In 3D, for $\\mathbf{F} = \\langle P, Q, R \\rangle$: $\\;P_y = Q_x,\\; P_z = R_x,\\; Q_z = R_y.$
 +++
-**Why three equations in 3D?** If $\\mathbf{F} = \\nabla f = \\langle f_x, f_y, f_z \\rangle$, each pair of variables gives a pair of mixed partials that must agree: $f_{xy} = f_{yx}$, $f_{xz} = f_{zx}$, $f_{yz} = f_{zy}$. That's one equation for each of the three coordinate planes, meaning no twist when viewed from any direction.
+**Why three equations in 3D?** If $\\mathbf{F} = \\nabla f = \\langle f_x, f_y, f_z \\rangle$, each pair of variables gives a pair of mixed partials that must agree: $f_{xy} = f_{yx}$, $f_{xz} = f_{zx}$, $f_{yz} = f_{zy}$. That's one equation for each pair of variables: the circulation $Q_x - P_y$ in the $xy$-directions, and the matching differences $R_x - P_z$ and $R_y - Q_z$ for the other two pairs, all have to be $0$.
 
 **How to use it.** This theorem only ever proves a field is **not** conservative: if any pair differs, you're done. If they all match, you need the next theorem to conclude anything.
 :::
 
 :::figure rotation-vs-gradient
-Left: $\\langle -y, x \\rangle$ has $P_y = -1$ but $Q_x = 1$. You can see it swirl around the origin. Right: $\\langle x, -y \\rangle = \\nabla\\big(\\tfrac{x^2 - y^2}{2}\\big)$ has $P_y = 0 = Q_x$. No twist.
+Left: $\\langle -y, x \\rangle$ has $P_y = -1$ but $Q_x = 1$, so $Q_x - P_y = 2$; its arrows go counterclockwise around the origin. Right: $\\langle x, -y \\rangle = \\nabla\\big(\\tfrac{x^2 - y^2}{2}\\big)$ has $P_y = 0 = Q_x$, so $Q_x - P_y = 0$.
 :::
 
 :::check
-Which one has a twist (swirls, so $P_y \\neq Q_x$)?
+Which one has $Q_x - P_y \\neq 0$, so it can't be a gradient?
 - [ ] $\\langle y, x \\rangle$
-  why: $P_y = 1$ and $Q_x = 1$ match, so there's no twist. In fact it's $\\nabla(xy)$.
+  why: $P_y = 1$ and $Q_x = 1$, so $Q_x - P_y = 0$. In fact it's $\\nabla(xy)$.
 - [x] $\\langle -y, x \\rangle$
 ???
 $\\langle -y, x \\rangle$: $P_y = -1$ but $Q_x = 1$.
 
-$\\langle y, x \\rangle$ has $P_y = 1 = Q_x$, so no twist. It's $\\nabla(xy)$.
+$\\langle y, x \\rangle$ has $P_y = 1 = Q_x$, so $Q_x - P_y = 0$. It's $\\nabla(xy)$.
 :::
 
 :::example Spotting a non-conservative field
@@ -122,15 +122,15 @@ The 3D version is the same with all three equations.
 :::check
 Which of these regions are simply connected?
 - [x] The whole plane
-  why: It's simply connected: there are no holes, so any loop drawn in it can be pulled tight into a single point, like a rubber band.
+  why: It's simply connected: there are no holes, so any closed loop in it can be shrunk continuously to a single point without leaving the plane.
 - [x] A disk
   why: It's simply connected: a disk is one piece with no holes.
 - [ ] The plane minus the origin
-  why: Not simply connected: a rubber-band loop around the origin can't be pulled tight into a point without crossing the missing point.
+  why: Not simply connected: a loop around the origin can't be shrunk to a point without passing through the origin, which isn't in the region.
 - [ ] A ring (annulus)
-  why: Not simply connected: the inner disk is a hole, and a loop around it can't be pulled tight without crossing the hole.
+  why: Not simply connected: a loop around the inner disk can't be shrunk to a point without passing through the inner disk, which isn't in the region.
 ???
-**The whole plane and the disk** are. The other two each have a hole, so a loop around the hole can't be pulled tight into a point.
+**The whole plane and the disk** are. The other two each have a hole, so a loop around the hole can't be shrunk to a point without leaving the region.
 :::
 
 :::idea Finding the potential function
@@ -226,7 +226,7 @@ A conservative field gives $0$ around every [[closed curve]], so this one isn't 
 
 **What went wrong?** The field isn't defined at the origin, so its domain has a hole and the sufficient test doesn't apply.
 
-**Intuition.** Near any point, this field *is* a gradient: it's the gradient of the polar angle $\\theta$. But going once around the origin, $\\theta$ increases by $2\\pi$ and doesn't come back to where it started. It's like a spiral staircase: every step goes up, yet you return to the same spot on the floor plan. No single height function works all the way around.
+**Why there's no potential function.** Near any point, this field *is* a gradient: it's the gradient of the polar angle $\\theta$ (checked in Go deeper). But following $\\theta$ continuously once around the origin, it increases by $2\\pi$, so at the starting point it would need to equal both $\\theta_0$ and $\\theta_0 + 2\\pi$. No single function $f$ can do that on the whole plane minus the origin, so there's no potential function there, and the loop integral comes out to $2\\pi$ instead of $0$.
 +++
 **Checking that it's the gradient of $\\theta$.** In the right half-plane, $\\theta = \\arctan(y/x)$. Then
 $$\\theta_x = \\frac{1}{1 + y^2/x^2}\\cdot\\left(-\\frac{y}{x^2}\\right) = \\frac{-y}{x^2+y^2}, \\qquad \\theta_y = \\frac{1}{1 + y^2/x^2}\\cdot\\frac{1}{x} = \\frac{x}{x^2+y^2}.$$

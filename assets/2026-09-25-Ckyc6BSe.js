@@ -55,7 +55,7 @@ $\\nabla f = \\langle 2x,\\; 2y - 2 \\rangle = \\mathbf 0$ gives $(0, 1)$, and $
 At a critical point $(a, b)$, compute the **discriminant**
 $$D = f_{xx} f_{yy} - \\left(f_{xy}\\right)^2.$$
 
-**Intuition.** $D > 0$ means the surface curves the *same way* in every direction: a bowl or a dome. Then $f_{xx}$ tells you which: positive (curving up) is a bowl, so a min; negative is a dome, so a max. $D < 0$ means it curves up in some directions and down in others: a saddle.
+**What $D$ measures.** At a critical point the first derivatives are $0$, so for a small step $(h, k)$, $f$ changes by about $\\tfrac12\\big(f_{xx} h^2 + 2 f_{xy} hk + f_{yy} k^2\\big)$. $D > 0$ means this has the **same sign for every step direction**: all positive when $f_{xx} > 0$ (every nearby value is bigger, so a min), all negative when $f_{xx} < 0$ (a max). $D < 0$ means some step directions make it positive and others negative: a saddle.
 +++
 **Where $D$ comes from.** Near a critical point, $f$ looks like a quadratic: $f \\approx f(a,b) + \\tfrac12\\big(A h^2 + 2B hk + C k^2\\big)$ with $A = f_{xx}$, $B = f_{xy}$, $C = f_{yy}$, and $h, k$ the small steps. Completing the square (when $A \\neq 0$):
 $$A h^2 + 2Bhk + Ck^2 = A\\left(h + \\frac{B}{A}k\\right)^2 + \\frac{AC - B^2}{A}k^2.$$
@@ -73,7 +73,7 @@ At a critical point with continuous second partial derivatives:
 :::
 
 :::figure critical-points-cubic
-Level curves of $f = x^3 + y^3 - 3xy$. Around the minimum at $(1,1)$ the level curves form rings inside rings, like a target, with labels getting smaller toward the middle. At the saddle $(0,0)$, the curve labeled $0$ crosses itself, making an X shape.
+Level curves of $f = x^3 + y^3 - 3xy$. Around the minimum at $(1,1)$ the level curves form closed loops, one inside another, with labels getting smaller toward the middle. At the saddle $(0,0)$, the curve labeled $0$ crosses itself, making an X shape.
 :::
 
 :::example Classifying the points
@@ -94,7 +94,7 @@ Classify the critical point $(0,0)$ of $f = x^2 + 3xy + y^2$.
 - [ ] the test can't tell
   why: The test only fails when $D = 0$. Here $D = 4 - 9 = -5$, which clearly says saddle.
 ???
-$f_{xx} = 2$, $f_{yy} = 2$, and $f_{xy} = 3$, so $D = 4 - 9 = -5 < 0$: a **saddle**. The $x^2$ and $y^2$ terms make it look like a bowl, but the $3xy$ term is big enough to make it a saddle.
+$f_{xx} = 2$, $f_{yy} = 2$, and $f_{xy} = 3$, so $D = 4 - 9 = -5 < 0$: a **saddle**. Check with steps of $0.1$: along the $x$-axis, $f(0.1, 0) = 0.01 > 0$, but along $y = -x$, $f(0.1, -0.1) = 0.01 - 0.03 + 0.01 = -0.01 < 0$. Values above and below $f(0,0) = 0$ sit right next to the origin, so it's a saddle.
 :::
 
 :::check

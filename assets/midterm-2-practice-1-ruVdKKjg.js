@@ -135,7 +135,7 @@ review: 2026-09-18 Gradients and level curves; 2026-09-18 The gradient; 2026-09-
 - $\\nabla f$ is perpendicular to the level curve and points toward **higher** values.
 - $\\lVert \\nabla f \\rVert$ is large where level curves are **close together**.
 - $D_{\\vec u} f(P)$ is the rate $f$ changes as you move from $P$ in direction $\\vec u$.
-- **Max or min:** the level curves form **rings inside rings** around one point, like a target. The point in the middle is a max (if the labels go up toward it) or a min (if they go down).
+- **Max or min:** the level curves form **rings inside rings** around one point (closed loops, one inside another). The point in the middle is a max (if the labels go up toward it) or a min (if they go down).
 - **Saddle:** one level curve **crosses itself**, making an X shape. The crossing point is the saddle.
 
 **(a)** On the right, the level curves form rings inside rings around $(1, 0)$, and the labels get smaller toward the middle, so that's a **minimum**. On the left, the curve labeled $2$ crosses itself at $(-1, 0)$, making an X, so that's a **saddle**. That's **2** critical points. (The map is of $f = x^3 - 3x + y^2$, whose critical points are $(\\pm 1, 0)$.)

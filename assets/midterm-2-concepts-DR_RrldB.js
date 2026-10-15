@@ -290,7 +290,7 @@ A flowline of a vector field $\\mathbf F$ is a curve $\\mathbf r(t)$ whose:
 +++
 review: 2026-10-07 Flowlines
 
-A flowline follows the arrows, like a cork in a stream: at every moment its velocity is the field's arrow at that spot.
+A flowline follows the arrows: at every moment its velocity is the field's arrow at that spot.
 
 **Why not the other choices.**
 - **position equals $\\mathbf F$:** the field is evaluated *at* the position, $\\mathbf F(\\mathbf r(t))$, and matched to the velocity.
