@@ -23,10 +23,11 @@ Is there a shortcut, like the Fundamental Theorem of Calculus, that skips parame
 :::idea Pieces and directions
 **Paths made of pieces.** If $C$ is $C_1$ followed by $C_2$, then
 $$\\int_C \\mathbf F \\cdot d\\mathbf r = \\int_{C_1} \\mathbf F \\cdot d\\mathbf r + \\int_{C_2} \\mathbf F \\cdot d\\mathbf r.$$
-Parametrize each piece on its own.
+This holds because the integral adds up $\\mathbf F \\cdot d\\mathbf r$ over every small step of the path, and you can add the steps on $C_1$ first and the steps on $C_2$ second. Parametrize each piece on its own.
 
 **Reversing direction.** Writing $-C$ for $C$ traced backward:
 $$\\int_{-C} \\mathbf F \\cdot d\\mathbf r = -\\int_C \\mathbf F \\cdot d\\mathbf r.$$
+Why: walking backward, you pass through the same points, so $\\mathbf F$ is the same at each one. But at each point your step $d\\mathbf r$ points the opposite way, so every $\\mathbf F \\cdot d\\mathbf r$ is the negative of what it was.
 +++
 **Example in $P\\,dx + Q\\,dy$ notation.** Compute $\\int_C y\\, dx + x^2\\, dy$, where $C$ goes from $(0,0)$ to $(1,0)$, then up to $(1,1)$.
 
@@ -63,6 +64,8 @@ $$\\int_C \\nabla f \\cdot d\\mathbf r = \\int_a^b \\frac{d}{dt} f(\\mathbf r(t)
 :::theorem Fundamental Theorem for Line Integrals
 If $C$ is a smooth (or piecewise smooth) curve from $A$ to $B$ and $f$ is differentiable with $\\nabla f$ continuous on $C$, then
 $$\\int_C \\nabla f \\cdot d\\mathbf r = f(B) - f(A).$$
+
+**Why:** along the curve, the chain rule says $\\nabla f(\\mathbf r(t)) \\cdot \\mathbf r'(t)$ is exactly $\\dfrac{d}{dt} f(\\mathbf r(t))$. So the line integral is the integral of a derivative, and the ordinary Fundamental Theorem of Calculus turns it into $f(\\mathbf r(b)) - f(\\mathbf r(a)) = f(B) - f(A)$. (Derived step by step just above.)
 :::
 
 :::example Using the shortcut

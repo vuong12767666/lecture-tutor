@@ -27,6 +27,8 @@ Once you've found a critical point, how can you tell whether it's a local max, a
 :::idea Critical points
 A function has a **local max** at $(a,b)$ if $f(a,b) \\ge f(x,y)$ for all nearby points (local min: $\\le$). A **saddle point** is a critical point that's neither.
 
+**Why extremes happen only at critical points** (shown on Sep 21): at a local max or min inside the domain, moving in any direction can't increase (or can't decrease) $f$, so every directional derivative $\\nabla f \\cdot \\mathbf u$ must be $0$, and that forces $\\nabla f = \\mathbf 0$.
+
 **Finding critical points** means solving $f_x = 0$ and $f_y = 0$ *together*. This is usually the hardest algebra in the problem. A good habit is to solve one equation for one variable, substitute into the other, and don't divide by something that could be zero.
 +++
 **Critical points where a derivative doesn't exist.** The cone $f = \\sqrt{x^2 + y^2}$ has its minimum at the origin, where it comes to a sharp point and the partial derivatives don't exist. It's still a critical point, and it's a min. Most exam problems use smooth functions, though, so you'll mostly be solving $\\nabla f = \\mathbf 0$.
@@ -55,13 +57,28 @@ $\\nabla f = \\langle 2x,\\; 2y - 2 \\rangle = \\mathbf 0$ gives $(0, 1)$, and $
 At a critical point $(a, b)$, compute the **discriminant**
 $$D = f_{xx} f_{yy} - \\left(f_{xy}\\right)^2.$$
 
-**What $D$ measures.** At a critical point the first derivatives are $0$, so for a small step $(h, k)$, $f$ changes by about $\\tfrac12\\big(f_{xx} h^2 + 2 f_{xy} hk + f_{yy} k^2\\big)$. $D > 0$ means this has the **same sign for every step direction**: all positive when $f_{xx} > 0$ (every nearby value is bigger, so a min), all negative when $f_{xx} < 0$ (a max). $D < 0$ means some step directions make it positive and others negative: a saddle.
-+++
-**Where $D$ comes from.** Near a critical point, $f$ looks like a quadratic: $f \\approx f(a,b) + \\tfrac12\\big(A h^2 + 2B hk + C k^2\\big)$ with $A = f_{xx}$, $B = f_{xy}$, $C = f_{yy}$, and $h, k$ the small steps. Completing the square (when $A \\neq 0$):
-$$A h^2 + 2Bhk + Ck^2 = A\\left(h + \\frac{B}{A}k\\right)^2 + \\frac{AC - B^2}{A}k^2.$$
-If $D = AC - B^2 > 0$, both terms have the sign of $A$, so the quadratic is always positive (min) or always negative (max). If $D < 0$, the two terms have opposite signs, so some directions go up and others down: a saddle.
+**Why $D$ decides it, step by step.**
 
-**When $D = 0$, anything can happen.** $x^4 + y^4$ (min), $-x^4 - y^4$ (max), and $x^4 - y^4$ (saddle) all have $D = 0$ at the origin. You'd need another argument.
+*Step 1: look along every line through the point.* Pick any direction $(h, k)$ and look at $f$ along the line through $(a, b)$ in that direction:
+$$g(t) = f(a + th,\\; b + tk).$$
+$g$ is an ordinary one-variable function, so Calc I applies: if $g'(0) = 0$ and $g''(0) > 0$, $g$ has a min at $t = 0$, and if $g''(0) < 0$, a max.
+
+*Step 2: $g'(0) = 0$ in every direction.* By the chain rule, $g'(t) = f_x\\,h + f_y\\,k$ (with $f_x, f_y$ evaluated at $(a + th, b + tk)$). At a critical point $f_x = f_y = 0$, so $g'(0) = 0$.
+
+*Step 3: compute $g''(0)$.* Differentiate $g'(t) = f_x h + f_y k$ with the chain rule again. Along the line, $f_x$ changes at rate $f_{xx} h + f_{xy} k$ and $f_y$ at rate $f_{yx} h + f_{yy} k$, so
+$$g''(0) = (f_{xx}h + f_{xy}k)\\,h + (f_{yx}h + f_{yy}k)\\,k = f_{xx}h^2 + 2f_{xy}hk + f_{yy}k^2,$$
+using $f_{xy} = f_{yx}$ (equal mixed partials).
+
+*Step 4: find the sign for all directions at once.* Write $A = f_{xx}$, $B = f_{xy}$, $C = f_{yy}$, so $D = AC - B^2$. When $A \\neq 0$, completing the square gives
+$$g''(0) = A h^2 + 2Bhk + Ck^2 = A\\left(h + \\tfrac{B}{A}k\\right)^2 + \\frac{D}{A}\\,k^2.$$
+- **$D > 0$:** both terms have the same sign as $A$, and they're both $0$ only when $h = k = 0$. So $g''(0)$ has the sign of $f_{xx}$ in **every** direction: a min along every line if $f_{xx} > 0$, a max if $f_{xx} < 0$. ($D > 0$ forces $A \\ne 0$, since $A = 0$ would make $D = -B^2 \\le 0$.)
+- **$D < 0$:** in the direction $k = 0$, $g''(0) = Ah^2$ has the sign of $A$. In the direction $h = -\\tfrac{B}{A}k$, the first term is $0$ and $g''(0) = \\tfrac{D}{A}k^2$ has the **opposite** sign. Curving up in one direction and down in another means a saddle. (If $A = 0$, then $D = -B^2 < 0$ means $B \\ne 0$, and $2Bhk + Ck^2$ still takes both signs.)
+
+So $D$ is exactly the number that tells you whether the second derivative along a line has one sign in every direction. (With continuous second partials, the same sign in every direction is enough to guarantee a true local min or max.)
++++
+**A numerical check of Step 4.** For $f = x^2 + 3xy + y^2$ at the origin: $A = 2$, $B = 3$, $C = 2$, so $D = 4 - 9 = -5$. In the direction $(1, 0)$: $g''(0) = 2 > 0$. In the direction $h = -\\tfrac{B}{A}k = -\\tfrac32 k$, for example $(-3, 2)$: $g''(0) = 2(9) + 2(3)(-3)(2) + 2(4) = 18 - 36 + 8 = -10 < 0$, matching $\\tfrac{D}{A}k^2 = \\tfrac{-5}{2}\\cdot 4 = -10$. Opposite signs, so a saddle.
+
+**When $D = 0$, anything can happen.** Then $g''(0) = 0$ in some direction, and the second derivative can't decide. $x^4 + y^4$ (min), $-x^4 - y^4$ (max), and $x^4 - y^4$ (saddle) all have $D = 0$ at the origin. You'd need another argument.
 :::
 
 :::theorem Second derivative test
@@ -70,6 +87,8 @@ At a critical point with continuous second partial derivatives:
 - $D > 0$ and $f_{xx} < 0$: **local max**.
 - $D < 0$: **saddle point**.
 - $D = 0$: the test gives **no conclusion**.
+
+**Why:** derived above. Along a line in direction $(h, k)$, the second derivative is $f_{xx}h^2 + 2f_{xy}hk + f_{yy}k^2$. When $D > 0$ it has the sign of $f_{xx}$ in every direction, and when $D < 0$ it has both signs. When $D = 0$ it is $0$ in some direction, so it can't decide.
 :::
 
 :::figure critical-points-cubic

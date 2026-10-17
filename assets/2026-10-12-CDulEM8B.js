@@ -54,6 +54,8 @@ This same quantity comes back later as the 2D *curl*, and it's the heart of Gree
 If $\\mathbf{F} = \\langle P, Q \\rangle$ is conservative and $P, Q$ have continuous first partial derivatives, then
 $$P_y = Q_x.$$
 In 3D, for $\\mathbf{F} = \\langle P, Q, R \\rangle$: $\\;P_y = Q_x,\\; P_z = R_x,\\; Q_z = R_y.$
+
+**Why:** if $\\mathbf F = \\nabla f$, then $P = f_x$ and $Q = f_y$, so $P_y = f_{xy}$ and $Q_x = f_{yx}$. Continuous second partials make the mixed partials equal (Clairaut's Theorem, §14.3), so $P_y = Q_x$.
 +++
 **Why three equations in 3D?** If $\\mathbf{F} = \\nabla f = \\langle f_x, f_y, f_z \\rangle$, each pair of variables gives a pair of mixed partials that must agree: $f_{xy} = f_{yx}$, $f_{xz} = f_{zx}$, $f_{yz} = f_{zy}$. That's one equation for each pair of variables: the circulation $Q_x - P_y$ in the $xy$-directions, and the matching differences $R_x - P_z$ and $R_y - Q_z$ for the other two pairs, all have to be $0$.
 
@@ -105,18 +107,28 @@ $P_y = 3x^2$ and $Q_x = 3x^2$. They match, and $P, Q$ are polynomials defined on
 
 :::idea Is the condition enough?
 Matching cross-partials is *necessary*. When is it also *sufficient*? It depends on the shape of the domain. If the domain is [[simply connected]] (no holes), matching partials guarantee a potential function exists.
+
+**Why no holes is enough.** Take any closed loop and fill the region inside it with a grid of tiny squares of side $h$. Walk each square counterclockwise and add up the results. Every inside edge belongs to two neighboring squares and is walked once in each direction, so those two pieces cancel. What's left is exactly the big loop:
+$$\\oint_{\\text{big loop}} \\mathbf F \\cdot d\\mathbf r = \\sum_{\\text{squares}} \\oint_{\\text{square}} \\mathbf F \\cdot d\\mathbf r.$$
+Each square gives $(Q_x - P_y)\\,h^2$ plus an error much smaller than $h^2$. If $Q_x - P_y = 0$, only the errors are left. There are about $(\\text{area})/h^2$ squares, so the errors add up to (area) times a number that shrinks to $0$ as $h \\to 0$. So the big loop gives exactly $0$.
+
+**Why a hole breaks it.** The squares have to cover the whole inside of the loop, and $\\mathbf F$ has to be defined on every one of them. If the loop goes around a hole where $\\mathbf F$ isn't defined, those squares don't exist, and the argument fails. That's exactly what "simply connected" rules out.
 +++
-**Why holes are the only obstacle.** Think about the tiny squares from the first part. A big loop can be filled in with tiny squares: their inside edges cancel (each is walked once in each direction), leaving just the big loop. If $Q_x - P_y = 0$ everywhere inside, every tiny square contributes $0$, so the big loop gives $0$.
+**From "every loop gives 0" to a potential function.** Pick a starting point $(x_0, y_0)$ and define
+$$f(x, y) = \\int \\mathbf F \\cdot d\\mathbf r \\quad\\text{along any path from } (x_0, y_0) \\text{ to } (x, y).$$
+Every loop giving $0$ means every path gives the same value (two paths with the same ends, one walked backward, form a loop), so $f$ is well defined. To find $f_x$, reach $(x + h, y)$ by first going to $(x, y)$, then straight right. The difference is only that last segment, where $\\mathbf r = \\langle x + t, y \\rangle$ and $\\mathbf r' = \\langle 1, 0 \\rangle$:
+$$f(x + h, y) - f(x, y) = \\int_0^h P(x + t, y)\\, dt \\approx P(x, y)\\, h.$$
+Dividing by $h$ and letting $h \\to 0$ gives $f_x = P$. Going straight up instead gives $f_y = Q$. So $\\nabla f = \\mathbf F$.
 
-That argument needs the **whole inside** of the loop to be in the domain. If the loop surrounds a hole, you can't fill it in, and the argument breaks. That's exactly what "simply connected" rules out.
-
-This "fill the loop with tiny squares" argument is Green's Theorem, which you'll see on Nov 9.
+**Squares along a curved loop** don't fit its edge exactly, so this is the idea of the proof rather than all of it. The full version is Green's Theorem, which you'll see on Nov 9.
 :::
 
 :::theorem Cross-partials test (sufficient)
 Let $D$ be an open, simply connected region (connected, with no holes). If $P, Q$ have continuous first partials on $D$ and $P_y = Q_x$ throughout $D$, then $\\mathbf{F}$ is conservative on $D$.
 
 The 3D version is the same with all three equations.
+
+**Why:** with $P_y = Q_x$, every tiny square has loop integral $0$ (up to errors that vanish as $h \\to 0$). With no holes, any closed loop can be filled with tiny squares whose inside edges cancel, so every closed loop gives $0$. Then $f(x, y) = \\int \\mathbf F \\cdot d\\mathbf r$ from a fixed starting point to $(x, y)$ is the same along every path, and its partials are $f_x = P$ and $f_y = Q$. (Both steps are worked out in "Is the condition enough?" above.)
 :::
 
 :::check

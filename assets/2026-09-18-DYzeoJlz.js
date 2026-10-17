@@ -27,7 +27,13 @@ $f_x$ and $f_y$ tell you how $f$ changes going east or north. How fast does $f$ 
 When $x$ and $y$ depend on **two** variables $s$ and $t$, each partial derivative gets its own chain rule:
 $$\\frac{\\partial z}{\\partial s} = f_x \\frac{\\partial x}{\\partial s} + f_y \\frac{\\partial y}{\\partial s}, \\qquad \\frac{\\partial z}{\\partial t} = f_x \\frac{\\partial x}{\\partial t} + f_y \\frac{\\partial y}{\\partial t}.$$
 
-**Tree diagram.** Draw $z$ at the top, branching to $x$ and $y$, each branching to $s$ and $t$. To get $\\partial z / \\partial s$, follow every path from $z$ down to $s$, multiply the derivatives along each path, and add the paths.
+**Why it's true.** Start from the linear approximation of $f$ (the tangent plane, §14.4): for small changes $\\Delta x$ and $\\Delta y$,
+$$\\Delta z \\approx f_x\\,\\Delta x + f_y\\,\\Delta y.$$
+Now change only $s$, by a small $\\Delta s$. Then $x$ changes by $\\Delta x \\approx x_s\\,\\Delta s$ and $y$ changes by $\\Delta y \\approx y_s\\,\\Delta s$ (the definition of the partial derivatives $x_s$ and $y_s$). Substitute both:
+$$\\Delta z \\approx f_x\\, x_s\\,\\Delta s + f_y\\, y_s\\,\\Delta s.$$
+Divide by $\\Delta s$ and let $\\Delta s \\to 0$. The approximations become exact in the limit, giving $\\dfrac{\\partial z}{\\partial s} = f_x x_s + f_y y_s$. The two terms are the two ways a change in $s$ reaches $z$: through $x$ and through $y$.
+
+**Tree diagram.** That's exactly what the tree records. Draw $z$ at the top, branching to $x$ and $y$, each branching to $s$ and $t$. Each path from $z$ down to $s$ is one way $s$ affects $z$, so multiply the derivatives along each path and add the paths.
 +++
 **A check you can do in your head.** Take $f = x^2 + y^2$ with $x = s\\cos t$, $y = s\\sin t$ (polar coordinates). Then $z = s^2$, so $\\partial z/\\partial s = 2s$. The chain rule agrees:
 $$f_x x_s + f_y y_s = (2x)\\cos t + (2y)\\sin t = 2s\\cos^2 t + 2s\\sin^2 t = 2s.$$
@@ -51,7 +57,11 @@ Stand at a point $(a, b)$ and walk at unit speed in the direction of a **unit** 
 $$D_{\\mathbf u} f(a,b) = \\lim_{h \\to 0} \\frac{f(a + h u_1,\\; b + h u_2) - f(a,b)}{h}.$$
 $f_x$ and $f_y$ are the special cases $\\mathbf u = \\langle 1, 0 \\rangle$ and $\\mathbf u = \\langle 0, 1 \\rangle$.
 
-**How to compute it.** Your path is $\\mathbf r(h) = \\langle a + h u_1, b + h u_2 \\rangle$. By the chain rule, the rate is $f_x u_1 + f_y u_2$.
+**Why $D_{\\mathbf u} f = f_x u_1 + f_y u_2$.** The limit above is the derivative at $h = 0$ of the one-variable function
+$$g(h) = f(a + h u_1,\\; b + h u_2),$$
+which is $f$ along the straight line through $(a,b)$ in direction $\\mathbf u$. Here $x = a + h u_1$ and $y = b + h u_2$ both depend on $h$, with $\\frac{dx}{dh} = u_1$ and $\\frac{dy}{dh} = u_2$. The chain rule gives
+$$g'(0) = f_x \\frac{dx}{dh} + f_y \\frac{dy}{dh} = f_x u_1 + f_y u_2.$$
+So you never need to compute the limit: the directional derivative is the gradient dotted with $\\mathbf u$.
 +++
 **Why $\\mathbf u$ must be a unit vector.** In the example below, using $\\mathbf v = \\langle 3, 4 \\rangle$ instead of $\\mathbf u$ gives $16$, five times too big. That's because $\\lVert \\mathbf v \\rVert = 5$, so you'd be walking five times as fast. The directional derivative is a rate *per unit distance*, so always divide by the length first.
 
@@ -62,6 +72,8 @@ $f_x$ and $f_y$ are the special cases $\\mathbf u = \\langle 1, 0 \\rangle$ and 
 If $f$ is differentiable and $\\mathbf u$ is a **unit** vector, then
 $$D_{\\mathbf u} f = \\nabla f \\cdot \\mathbf u = f_x u_1 + f_y u_2.$$
 In 3D, add the term $f_z u_3$.
+
+**Why:** it's the derivative of $f$ along the line through the point in direction $\\mathbf u$, computed with the chain rule (derived just above). In 3D the line has a third coordinate $c + h u_3$, which adds the term $f_z u_3$.
 :::
 
 :::example Directional derivative toward a point
@@ -87,9 +99,12 @@ That makes sense: at $(1,1)$, the direction $\\langle 1, -1 \\rangle$ is tangent
 The **gradient** collects all the partial derivatives into one vector:
 $$\\nabla f = \\langle f_x, f_y \\rangle \\quad\\text{(add } f_z \\text{ in 3D).}$$
 
-Write the directional derivative with the angle $\\theta$ between $\\nabla f$ and $\\mathbf u$:
-$$D_{\\mathbf u} f = \\nabla f \\cdot \\mathbf u = \\lVert \\nabla f \\rVert\\,\\lVert \\mathbf u \\rVert \\cos\\theta = \\lVert \\nabla f \\rVert \\cos\\theta.$$
-Since $\\cos\\theta$ is between $-1$ and $1$, this one formula answers today's question.
+**Why the gradient answers today's question.** Use the dot product formula $\\mathbf a \\cdot \\mathbf b = \\lVert \\mathbf a \\rVert\\,\\lVert \\mathbf b \\rVert \\cos\\theta$ (from §12.3), with $\\theta$ the angle between $\\nabla f$ and $\\mathbf u$, and $\\lVert \\mathbf u \\rVert = 1$:
+$$D_{\\mathbf u} f = \\nabla f \\cdot \\mathbf u = \\lVert \\nabla f \\rVert \\cos\\theta.$$
+At a given point, $\\lVert \\nabla f \\rVert$ is a fixed number, so the rate depends only on $\\cos\\theta$, which ranges from $-1$ to $1$:
+- $\\cos\\theta = 1$ (that is, $\\theta = 0$, $\\mathbf u$ points the same way as $\\nabla f$) gives the **largest** rate, $\\lVert \\nabla f \\rVert$.
+- $\\cos\\theta = -1$ ($\\mathbf u$ points opposite $\\nabla f$) gives the **most negative** rate, $-\\lVert \\nabla f \\rVert$.
+- $\\cos\\theta = 0$ ($\\mathbf u$ perpendicular to $\\nabla f$) gives rate $0$.
 +++
 **Checking it with real numbers.** Take $f = x^2 y$ at $(1, 2)$, where $\\nabla f = \\langle 4, 1 \\rangle$ and $\\lVert \\nabla f \\rVert = \\sqrt{17} \\approx 4.12$. Move a distance $0.01$ in five different unit directions and compare how much $f$ actually changes:
 
@@ -103,7 +118,6 @@ Since $\\cos\\theta$ is between $-1$ and $1$, this one formula answers today's q
 
 Each actual change is close to $D_{\\mathbf u} f \\times 0.01$. The direction of $\\nabla f$ gives the biggest increase, the perpendicular direction leaves $f$ almost unchanged, and the opposite direction gives the biggest decrease.
 
-**Why the maximum is $\\lVert \\nabla f \\rVert$.** The largest $\\cos\\theta$ can be is $1$, at $\\theta = 0$, which means $\\mathbf u$ points the same way as $\\nabla f$. No other direction can beat it.
 :::
 
 :::theorem Properties of the gradient
@@ -111,6 +125,8 @@ At a point where $\\nabla f \\neq \\mathbf 0$:
 - $f$ increases fastest in the direction of $\\nabla f$, at rate $\\lVert \\nabla f \\rVert$.
 - $f$ decreases fastest in the direction of $-\\nabla f$, at rate $-\\lVert \\nabla f \\rVert$.
 - $f$ doesn't change ($D_{\\mathbf u} f = 0$) in directions perpendicular to $\\nabla f$.
+
+**Why:** all three come from $D_{\\mathbf u} f = \\lVert \\nabla f \\rVert \\cos\\theta$, derived above, at $\\theta = 0°$, $180°$, and $90°$.
 :::
 
 :::example Steepest direction, in 2D and 3D
