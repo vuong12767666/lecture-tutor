@@ -26,6 +26,14 @@ How does the test work in 3D? How do path independence, closed loops, and the cr
 For $\\mathbf F = \\langle P, Q, R \\rangle$ on a simply connected region in $\\mathbb R^3$ (no holes that a loop can wrap around), $\\mathbf F$ is conservative exactly when **all three** cross-partial pairs match:
 $$P_y = Q_x, \\qquad P_z = R_x, \\qquad Q_z = R_y.$$
 Then find $f$ the same way as in 2D, one variable at a time. Each new "constant" depends on one fewer variable.
+
+**Why all three pairs must match.** If $\\mathbf F = \\nabla f$, then $P = f_x$, $Q = f_y$, and $R = f_z$. Each pair of variables gives a pair of equal mixed partials:
+$$P_y = f_{xy} = f_{yx} = Q_x, \\qquad P_z = f_{xz} = f_{zx} = R_x, \\qquad Q_z = f_{yz} = f_{zy} = R_y.$$
+Checking only one pair isn't enough. $\\langle z, 0, 0 \\rangle$ has $P_y = 0 = Q_x$, but $P_z = 1 \\neq 0 = R_x$. Around the square $(0,0,0) \\to (1,0,0) \\to (1,0,1) \\to (0,0,1) \\to (0,0,0)$ in the $xz$-plane, its integral is $-1$ (only the top edge contributes: $z = 1$ while $x$ goes from $1$ to $0$), so it isn't conservative.
+
+**Why matching all three is enough** (on a region with no holes): it's the 3D version of Oct 12's tiny-square argument, with tiny squares facing every direction. That argument is Stokes' Theorem (Nov 30).
+
+**Why each new "constant" depends on the other variables.** When you integrate $P$ with respect to $x$, anything without an $x$ in it has $x$-derivative $0$. So the "constant" can be any function $g(y, z)$. Matching $Q$ pins down how $g$ depends on $y$, leaving an unknown $h(z)$, and matching $R$ pins down $h$.
 +++
 **Example.** $\\mathbf F = \\langle yz,\\; xz + 2y,\\; xy + 1 \\rangle$.
 
@@ -54,9 +62,14 @@ On an open, connected region $D$, these three statements are **equivalent** (eac
 3. $\\oint_C \\mathbf F \\cdot d\\mathbf r = 0$ for every closed curve $C$ in $D$.
 
 A fourth statement, **4. the cross-partials match**, follows from 1 whenever $\\mathbf F$ has continuous partial derivatives (because mixed partials of $f$ are equal). But it only implies 1 when $D$ is **simply connected**.
-+++
-**Why 2 and 3 are the same.** Two paths $C_1$ and $C_2$ from $A$ to $B$ make a closed loop: go out along $C_1$ and back along $-C_2$. The loop integral is $\\int_{C_1} - \\int_{C_2}$, so "every loop gives $0$" is the same as "every pair of paths agrees."
 
+**Why each link holds:**
+- **1 gives 2.** The Fundamental Theorem (Oct 9) says every path from $A$ to $B$ gives $f(B) - f(A)$, so the route doesn't matter.
+- **2 and 3 are the same.** Two paths $C_1$ and $C_2$ from $A$ to $B$ make a closed loop: out along $C_1$, back along $-C_2$. The loop integral is $\\int_{C_1} - \\int_{C_2}$, so "every loop gives $0$" says exactly "every two paths agree."
+- **2 gives 1.** Define $f(x, y)$ as the integral of $\\mathbf F$ from a fixed starting point to $(x, y)$. Path independence makes that a single number, and its partials are $f_x = P$ and $f_y = Q$ (Oct 12, "Is the condition enough?").
+- **1 gives 4.** $P_y = f_{xy} = f_{yx} = Q_x$, by equal mixed partials.
+- **4 gives 1 only without holes.** Matching cross-partials make every *tiny* loop give $0$. A big loop can be built from tiny ones only if no hole is in the way (Oct 12).
++++
 **Why 4 needs no holes.** The swirl field $\\langle -y, x \\rangle/(x^2+y^2)$ on the plane minus the origin satisfies 4 but gives $2\\pi$ around the unit circle, so 3 fails. The cross-partials only control tiny loops, and a loop around a hole can't be built from tiny loops inside the region.
 :::
 
@@ -76,11 +89,13 @@ The cross-partials test needs a simply connected region, and the plane minus the
 :::idea Closed loops
 For a closed curve, $\\oint_C$ means the curve ends where it starts.
 
-- If $\\mathbf F$ is conservative on a region containing $C$: $\\oint_C \\mathbf F \\cdot d\\mathbf r = 0$, with no computation.
-- If you find one closed loop with a **nonzero** integral, then $\\mathbf F$ is **not** conservative.
+- If $\\mathbf F$ is conservative on a region containing $C$: $\\oint_C \\mathbf F \\cdot d\\mathbf r = 0$, with no computation, because the curve ends where it starts and $f(A) - f(A) = 0$.
+- If you find one closed loop with a **nonzero** integral, then $\\mathbf F$ is **not** conservative, since a conservative field would have given $0$.
 - For the swirl field, the integral around a loop counts how many times the loop **winds around the hole**: $2\\pi$ for once counterclockwise, and $0$ for a loop that doesn't go around the origin.
+
+**Why the swirl field counts windings.** Near any point (away from the origin), the swirl field is the gradient of the polar angle $\\theta$. Check: where $x > 0$, $\\theta = \\arctan(y/x)$, and differentiating gives $\\theta_x = \\dfrac{-y}{x^2 + y^2}$ and $\\theta_y = \\dfrac{x}{x^2 + y^2}$. (Elsewhere $\\theta$ is given by other formulas that differ from this one by a constant, so the partials are the same.) So along any stretch of path, the integral is the change in $\\theta$ along it (the Fundamental Theorem, Oct 9). Follow $\\theta$ continuously around the loop. If the loop doesn't go around the origin, $\\theta$ ends up back where it started, so the total is $0$. Each counterclockwise trip around the origin increases $\\theta$ by $2\\pi$.
 +++
-**Why a loop that doesn't go around the hole gives $0$ for the swirl field.** Near any point, the swirl field is the gradient of the angle $\\theta$, so the integral along any piece of path is the change in $\\theta$ along it. Follow $\\theta$ continuously around the loop. If the loop doesn't wind around the origin, $\\theta$ ends up back at its starting value, so the total is $0$. Each counterclockwise trip around the origin adds $2\\pi$, and that's the only way to get something nonzero.
+**Then why isn't the swirl field conservative?** It's a gradient near every point, but no single $f$ works on the whole region: if one did, the integral around the unit circle would be $f(A) - f(A) = 0$, not $2\\pi$. The angle shows what goes wrong. Following $\\theta$ once around the origin brings you back to the same point with $\\theta$ larger by $2\\pi$, so $\\theta$ can't be one continuous function on the whole plane minus the origin.
 :::
 
 :::check
@@ -93,10 +108,12 @@ It's a gradient field, and $x^3 y + e^y$ is defined everywhere, so around any cl
 :::idea A strategy for any line integral
 For $\\int_C \\mathbf F \\cdot d\\mathbf r$, work down this list:
 
-1. **Is $C$ closed and $\\mathbf F$ conservative** (cross-partials match, no holes)? Then the answer is $0$.
-2. **Is $\\mathbf F$ conservative?** Find $f$ and compute $f(B) - f(A)$. The path's shape doesn't matter.
+1. **Is $C$ closed and $\\mathbf F$ conservative** (cross-partials match, no holes)? Then the answer is $0$, since $f(A) - f(A) = 0$.
+2. **Is $\\mathbf F$ conservative?** Find $f$ and compute $f(B) - f(A)$. The path's shape doesn't matter (Fundamental Theorem, Oct 9).
 3. **Otherwise**, parametrize and compute $\\int \\mathbf F(\\mathbf r(t)) \\cdot \\mathbf r'(t)\\, dt$.
 4. **Almost conservative?** Split $\\mathbf F$ into a gradient part plus a simple leftover. Use the shortcut on the first part and compute only the leftover directly.
+
+**Why splitting works.** The dot product distributes, $(\\mathbf F_1 + \\mathbf F_2) \\cdot \\mathbf r' = \\mathbf F_1 \\cdot \\mathbf r' + \\mathbf F_2 \\cdot \\mathbf r'$, and integrals of sums are sums of integrals. So $\\int_C (\\mathbf F_1 + \\mathbf F_2) \\cdot d\\mathbf r = \\int_C \\mathbf F_1 \\cdot d\\mathbf r + \\int_C \\mathbf F_2 \\cdot d\\mathbf r$, and each part can be done its own way.
 +++
 **Example of step 4.** $\\mathbf F = \\langle 2xy,\\; x^2 + x \\rangle$ along $\\mathbf r(t) = \\langle t, t^2 \\rangle$, $0 \\le t \\le 1$.
 

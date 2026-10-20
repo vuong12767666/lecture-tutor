@@ -23,7 +23,7 @@ What is a vector field? And how do you add up how much a field **pushes you alon
 :::idea What a vector field is
 A [[vector field]] attaches an arrow to every point:
 $$\\mathbf F(x,y) = \\langle P(x,y),\\; Q(x,y) \\rangle \\qquad\\text{(in 3D, add } R(x,y,z)\\text{)}.$$
-Examples: wind velocity on a weather map, the flow of water, the force of gravity. A [[gradient]] field $\\nabla f$ is a vector field too, with its arrows crossing the level curves of $f$.
+Examples: wind velocity on a weather map, the flow of water, the force of gravity. A [[gradient]] field $\\nabla f$ is a vector field too, with its arrows crossing the level curves of $f$ at right angles (Sep 18).
 
 **Sketching.** Plug in a few points and draw $\\mathbf F$ there as an arrow starting at the point.
 +++
@@ -86,15 +86,19 @@ To add up how much $\\mathbf F$ pushes **along** a path $C$, use the [[line inte
 $$\\int_C \\mathbf F \\cdot d\\mathbf r = \\int_a^b \\mathbf F(\\mathbf r(t)) \\cdot \\mathbf r'(t)\\, dt.$$
 If $\\mathbf F$ is a force, this is the **work** it does on an object moving along $C$.
 
+**Why this formula.** In physics, a constant force $\\mathbf F$ acting over a straight-line displacement $\\mathbf d$ does work $\\mathbf F \\cdot \\mathbf d = \\lVert \\mathbf F \\rVert\\, \\lVert \\mathbf d \\rVert \\cos\\theta$: only the part of the force along the motion, $\\lVert \\mathbf F \\rVert \\cos\\theta$, counts, times the distance. On a curved path the force changes, so chop the time into short steps of length $\\Delta t$. During one step the object moves by $\\Delta\\mathbf r \\approx \\mathbf r'(t)\\, \\Delta t$, which is nearly straight, and $\\mathbf F$ is nearly constant. So that step's work is about
+$$\\mathbf F(\\mathbf r(t)) \\cdot \\mathbf r'(t)\\, \\Delta t.$$
+Adding up the steps and letting $\\Delta t \\to 0$ gives the integral.
+
 **Recipe:** (1) parametrize $C$ in the right direction, (2) substitute to get $\\mathbf F(\\mathbf r(t))$, (3) dot it with $\\mathbf r'(t)$, which gives one function of $t$, (4) integrate.
 
-**Sign:** positive if $\\mathbf F$ mostly points along the direction of motion, negative if against it, and zero if it's always perpendicular.
+**Sign.** Each step's work has the sign of $\\cos\\theta$, where $\\theta$ is the angle between $\\mathbf F$ and the motion: positive under $90°$, negative over $90°$, zero at exactly $90°$. So the integral is positive if $\\mathbf F$ mostly points along the motion, negative if mostly against it, and zero if it's always perpendicular.
+
+**Direction matters now.** Tracing $C$ backward passes the same points with the same $\\mathbf F$, but the motion $\\mathbf r'$ points the opposite way at each one. Every step's work changes sign, so the integral does too. Compare $\\int_C f\\, ds$, which doesn't care.
 +++
-**Why the dot product.** $\\mathbf F \\cdot \\mathbf r'\\, dt = (\\mathbf F \\cdot \\mathbf T)\\, ds$, where $\\mathbf T$ is the unit tangent. $\\mathbf F \\cdot \\mathbf T$ is the part of $\\mathbf F$ pointing along the path. So $\\int_C \\mathbf F \\cdot d\\mathbf r = \\int_C (\\mathbf F \\cdot \\mathbf T)\\, ds$: "force along the path times distance," added up.
+**The same integral with arc length.** Write $\\mathbf r' = \\lVert \\mathbf r' \\rVert\\, \\mathbf T$, where $\\mathbf T$ is the unit tangent, and $ds = \\lVert \\mathbf r' \\rVert\\, dt$. Then $\\mathbf F \\cdot \\mathbf r'\\, dt = (\\mathbf F \\cdot \\mathbf T)\\, ds$, so $\\int_C \\mathbf F \\cdot d\\mathbf r = \\int_C (\\mathbf F \\cdot \\mathbf T)\\, ds$: the force along the path, times distance, added up.
 
-**Direction matters now.** Reversing $C$ flips $\\mathbf T$, so the integral changes sign. Compare $\\int_C f\\, ds$, which doesn't care.
-
-**Other notation.** $\\int_C P\\, dx + Q\\, dy$ means the same thing, with $dx = x'(t)\\, dt$ and $dy = y'(t)\\, dt$.
+**Other notation.** $\\int_C P\\, dx + Q\\, dy$ means the same thing, with $dx = x'(t)\\, dt$ and $dy = y'(t)\\, dt$. It's the dot product written out: $\\mathbf F \\cdot \\mathbf r'\\, dt = (P\\, x' + Q\\, y')\\, dt = P\\, dx + Q\\, dy$.
 :::
 
 :::figure work-along-curve

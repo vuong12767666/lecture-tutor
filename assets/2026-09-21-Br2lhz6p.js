@@ -23,10 +23,19 @@ How does the gradient give the tangent plane to **any** surface? And how do "$\\
 :::
 
 :::idea Tangent planes to level surfaces
-A surface like $x^2 + 2y^2 + 3z^2 = 6$ is a **level surface** $F(x,y,z) = k$. Last time's argument shows $\\nabla F(P)$ is perpendicular to the surface at $P$, so it's the **normal vector** of the [[tangent plane]]:
+A surface like $x^2 + 2y^2 + 3z^2 = 6$ is a **level surface** $F(x,y,z) = k$. At a point $P = (x_0, y_0, z_0)$ on it, $\\nabla F(P)$ is the **normal vector** of the [[tangent plane]]:
 $$F_x(P)\\,(x - x_0) + F_y(P)\\,(y - y_0) + F_z(P)\\,(z - z_0) = 0.$$
 The **normal line** at $P$ is $\\langle x_0, y_0, z_0 \\rangle + t\\,\\nabla F(P)$.
+
+**Why $\\nabla F(P)$ is perpendicular to the surface.** Take any curve $\\mathbf r(t)$ that stays on the surface and passes through $P$ at $t = t_0$. Staying on the surface means $F(\\mathbf r(t)) = k$ for every $t$, so its derivative is $0$. By the chain rule,
+$$\\frac{d}{dt} F(\\mathbf r(t)) = \\nabla F(\\mathbf r(t)) \\cdot \\mathbf r'(t) = 0.$$
+At $t_0$ this says $\\nabla F(P)$ is perpendicular to $\\mathbf r'(t_0)$, the curve's direction as it passes through $P$. Every direction along the surface at $P$ is the direction of some curve on the surface, so $\\nabla F(P)$ is perpendicular to all of them. That's what it means to be the normal of the tangent plane. (This needs $\\nabla F(P) \\neq \\mathbf 0$.)
+
+**Why the plane's equation looks like that.** A point $(x, y, z)$ is in the plane exactly when the arrow from $P$ to it, $\\langle x - x_0,\\, y - y_0,\\, z - z_0 \\rangle$, is perpendicular to the normal. Writing "$\\nabla F(P) \\cdot \\langle x - x_0,\\, y - y_0,\\, z - z_0 \\rangle = 0$" out in components gives the equation above.
 +++
+**A check with numbers.** On $x^2 + 2y^2 + 3z^2 = 6$ at $(1, 1, 1)$, $\\nabla F = \\langle 2, 4, 6 \\rangle$. The curve $\\mathbf r(t) = \\langle \\sqrt3 \\cos t,\\; \\sqrt{3/2}\\, \\sin t,\\; 1 \\rangle$ stays on the surface (plug it in: $3\\cos^2 t + 3\\sin^2 t + 3 = 6$) and passes through $(1, 1, 1)$ when $\\cos t = \\tfrac{1}{\\sqrt3}$ and $\\sin t = \\sqrt{2/3}$. There, $\\mathbf r' = \\langle -\\sqrt3 \\sin t,\\; \\sqrt{3/2}\\, \\cos t,\\; 0 \\rangle = \\langle -\\sqrt2,\\; \\tfrac{1}{\\sqrt2},\\; 0 \\rangle$, and $\\langle 2, 4, 6 \\rangle \\cdot \\langle -\\sqrt2, \\tfrac{1}{\\sqrt2}, 0 \\rangle = -2\\sqrt2 + 2\\sqrt2 = 0$. ✓
+
+
 **Graphs are level surfaces too.** The graph $z = f(x,y)$ is the level surface $F(x,y,z) = f(x,y) - z = 0$. Then $\\nabla F = \\langle f_x, f_y, -1 \\rangle$, and the formula above becomes
 $$f_x(x - x_0) + f_y(y - y_0) - (z - z_0) = 0, \\quad\\text{i.e.}\\quad z - z_0 = f_x(x - x_0) + f_y(y - y_0),$$
 which is the tangent plane formula from §14.4. So the level-surface version is the more general tool. Use it whenever the surface isn't already solved for $z$.
@@ -58,13 +67,19 @@ $x + y + z = 5$ passes through the point but has the wrong normal. $2x + 4y + 4z
 :::
 
 :::idea Where the gradient is zero
-Suppose $f$ has a local max at a point $P$ inside its domain. Moving away from $P$ in any direction can't increase $f$, so $D_{\\mathbf u} f(P) = \\nabla f(P) \\cdot \\mathbf u \\le 0$ for every unit vector $\\mathbf u$. Using both $\\mathbf u$ and $-\\mathbf u$ gives $\\nabla f(P) \\cdot \\mathbf u \\le 0$ and $\\nabla f(P) \\cdot \\mathbf u \\ge 0$, so $\\nabla f(P) \\cdot \\mathbf u = 0$ for every $\\mathbf u$. The only vector with that property is $\\mathbf 0$. (A local min works the same way.) That gives the first rule of optimization:
+Suppose $f$ has a local max at a point $P$ inside its domain, and $f$ is differentiable there. Here is why $\\nabla f(P)$ must be $\\mathbf 0$.
+
+1. Moving away from $P$ can't increase $f$. So for any unit vector $\\mathbf u$ and small $h > 0$, the difference quotient $\\dfrac{f(P + h\\mathbf u) - f(P)}{h}$ is $\\le 0$. Its limit is $D_{\\mathbf u} f(P) = \\nabla f(P) \\cdot \\mathbf u$, so $\\nabla f(P) \\cdot \\mathbf u \\le 0$.
+2. That holds for $-\\mathbf u$ too: $\\nabla f(P) \\cdot (-\\mathbf u) \\le 0$, which means $\\nabla f(P) \\cdot \\mathbf u \\ge 0$. Together, $\\nabla f(P) \\cdot \\mathbf u = 0$ for every unit vector $\\mathbf u$.
+3. If $\\nabla f(P)$ weren't $\\mathbf 0$, choosing $\\mathbf u$ in its own direction would give $\\nabla f(P) \\cdot \\mathbf u = \\lVert \\nabla f(P) \\rVert > 0$. So $\\nabla f(P) = \\mathbf 0$.
+
+A local min works the same way with the inequalities reversed. That gives the first rule of optimization:
 
 A [[critical point]] is where $\\nabla f = \\mathbf 0$ (or a partial derivative doesn't exist). **Local maxima and minima can only happen at critical points.**
 
 But a critical point doesn't have to be a max or min. For $f = x^2 - y^2$, the gradient is $\\mathbf 0$ at the origin, yet the surface goes up along the $x$-axis and down along the $y$-axis: a **saddle point**.
 +++
-**Why $\\nabla f = \\mathbf 0$ at an interior max.** If $\\nabla f \\neq \\mathbf 0$, then moving a tiny step in the direction of $\\nabla f$ increases $f$ (that's what $D_{\\mathbf u} f = \\lVert \\nabla f \\rVert > 0$ means). So the point couldn't have been a max. The same argument with $-\\nabla f$ rules out a min.
+**A check with numbers.** For $f = x^2 + y^2 - 4x + 6y$ at $(0, 0)$, $\\nabla f = \\langle -4, 6 \\rangle \\neq \\mathbf 0$, and $f(0, 0) = 0$. A small step along $\\nabla f$, to $(-0.004,\\, 0.006)$, gives $f = 0.052052 > 0$, so $(0,0)$ isn't a max. A small step the other way, to $(0.004,\\, -0.006)$, gives $f = -0.051948 < 0$, so it isn't a min either. A nonzero gradient always allows both moves.
 
 **"Interior" matters.** This argument needs room to step in every direction. On the edge of a region, a max can happen where $\\nabla f \\neq \\mathbf 0$. That's why Sep 28's method checks the boundary separately.
 :::
@@ -99,7 +114,7 @@ The next three lectures each handle one kind of problem:
 2. **Absolute max/min on a closed, bounded region** (Sep 28): check critical points inside, check the boundary, and compare all the values.
 3. **Max/min on a constraint curve $g = c$** (Sep 30): solve $\\nabla f = \\lambda \\nabla g$ with [[lagrange multipliers|Lagrange multipliers]].
 
-**Preview of Lagrange.** If you're stuck walking on the curve $g = c$, then at the highest point *along the curve* you can't gain by moving along it. So $\\nabla f$ has no component along the curve. It's perpendicular to the curve, just like $\\nabla g$. Two vectors perpendicular to the same curve are parallel: $\\nabla f = \\lambda \\nabla g$.
+**Preview of Lagrange.** If you're stuck walking on the curve $g = c$, then at the highest point *along the curve* you can't gain by moving along it. So $\\nabla f$ has no component along the curve. It's perpendicular to the curve, just like $\\nabla g$. In the plane, all the vectors perpendicular to a curve at a point lie along one line, so those two are parallel: $\\nabla f = \\lambda \\nabla g$. (Sep 30 goes through each step.)
 +++
 **Constrained extremes don't need $\\nabla f = \\mathbf 0$.** Take $f = x^2 + y^2$ (squared distance from the origin) on the circle $(x - 3)^2 + y^2 = 1$. The closest point to the origin is $(2, 0)$, a constrained min with $f = 4$. But $\\nabla f(2, 0) = \\langle 4, 0 \\rangle \\neq \\mathbf 0$. It is parallel to $\\nabla g = \\langle 2(x - 3), 2y \\rangle = \\langle -2, 0 \\rangle$, though, exactly as Lagrange predicts.
 :::

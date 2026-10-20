@@ -25,18 +25,25 @@ How do you maximize $f$ when you're stuck on a curve $g = c$? And why do the gra
 :::
 
 :::idea Why the gradients line up
-Let $\\mathbf r(t)$ trace the constraint curve $g = c$, and say $f$ is largest along it at $\\mathbf r(t_0)$. Then the one-variable function $f(\\mathbf r(t))$ has its max at $t_0$, so its derivative is $0$ there. By the chain rule,
+Let $\\mathbf r(t)$ trace the constraint curve $g = c$, and say $f$ is largest along it at $\\mathbf r(t_0)$.
+
+*Step 1: $\\nabla f$ is perpendicular to the curve.* The one-variable function $f(\\mathbf r(t))$ has its max at $t_0$, so its derivative is $0$ there (Calc I). By the chain rule,
 $$\\frac{d}{dt} f(\\mathbf r(t)) = \\nabla f \\cdot \\mathbf r'(t) = 0 \\quad \\text{at } t_0.$$
 So $\\nabla f$ is **perpendicular to the curve's tangent** $\\mathbf r'(t_0)$.
 
-But $\\nabla g$ is also perpendicular to the curve, because the curve is a level curve of $g$. Two vectors perpendicular to the same curve at the same point are parallel:
+*Step 2: $\\nabla g$ is perpendicular to the curve too.* The curve stays on $g = c$, so $g(\\mathbf r(t)) = c$ for every $t$. A constant has derivative $0$, so by the chain rule $\\nabla g \\cdot \\mathbf r'(t) = 0$.
+
+*Step 3: so they're parallel.* In the plane, the vectors perpendicular to a tangent vector $\\langle a, b \\rangle$ are exactly the multiples of $\\langle -b, a \\rangle$: they all lie along one line. $\\nabla f$ and $\\nabla g$ are both on that line, so one is a multiple of the other:
 $$\\nabla f = \\lambda\\, \\nabla g.$$
+This needs $\\nabla g \\neq \\mathbf 0$ on the constraint, so there's something to be a multiple of. For circles and lines, that's automatic.
+
+The same three steps work at a constrained min, since its derivative along the curve is $0$ too.
 
 **In pictures:** at a constrained max or min, the level curve of $f$ **just touches** the constraint curve, tangent to it, without crossing.
 +++
-**Why "just touching" means extreme.** If a level curve $f = k$ *crosses* the constraint, then the constraint passes from the region where $f < k$ to where $f > k$. So you can move along the constraint to a bigger value, and $k$ wasn't the max. At the max, the highest level curve the constraint can reach only touches it.
+**A check with numbers.** For $f = x + 2y$ on $x^2 + y^2 = 5$ (the figure below), the max is at $(1, 2)$. The circle's tangent there is along $\\langle -2, 1 \\rangle$, and $\\nabla f = \\langle 1, 2 \\rangle$ and $\\nabla g = \\langle 2x, 2y \\rangle = \\langle 2, 4 \\rangle$ both have dot product $0$ with it. So $\\nabla f = \\tfrac12 \\nabla g$. Compare the non-extreme point $(2, 1)$ on the same circle: the tangent is along $\\langle -1, 2 \\rangle$, and $\\nabla f \\cdot \\langle -1, 2 \\rangle = -1 + 4 = 3 \\neq 0$. So $f$ still increases as you move counterclockwise along the circle from $(2, 1)$, from $f = 4$ up to $5$ at $(1, 2)$.
 
-**The fine print.** This needs $\\nabla g \\neq \\mathbf 0$ on the constraint. For curves like circles that's automatic.
+**Why "just touching" means extreme.** If a level curve $f = k$ *crosses* the constraint, then the constraint passes from the region where $f < k$ to where $f > k$. So you can move along the constraint to a bigger value, and $k$ wasn't the max. At the max, the highest level curve the constraint can reach only touches it.
 :::
 
 :::figure lagrange-tangent
@@ -63,8 +70,10 @@ $$f_x = \\lambda g_x, \\qquad f_y = \\lambda g_y, \\qquad g(x,y) = c.$$
 3. Evaluate $f$ at every solution. If the constraint is closed and bounded (like a circle), the largest value is the max and the smallest is the min.
 
 The value of $\\lambda$ itself is usually not needed.
+
+**Why step 3 finds the answer.** Every constrained max and min satisfies these equations (that's what the steps above showed), so the true max and min are among your solutions. A closed, bounded constraint like a circle is guaranteed to have both (Extreme Value Theorem, Sep 28). But the solutions can include other points too, such as the min when you're looking for the max, so you compare values instead of trusting any single solution.
 +++
-**The same method in 3D.** For $f(x,y,z)$ with $g(x,y,z) = c$, solve four equations in $x, y, z, \\lambda$. For example, maximize $f = xyz$ with $x + y + z = 3$ and $x, y, z > 0$: the equations $yz = \\lambda$, $xz = \\lambda$, $xy = \\lambda$ force $x = y = z$ (divide pairs, which is safe since all are positive), so $x = y = z = 1$ and the max is $f = 1$.
+**The same method in 3D.** For $f(x,y,z)$ with $g(x,y,z) = c$, solve four equations in $x, y, z, \\lambda$. It works for the same reason: now $g = c$ is a surface, and Step 1 applies to every curve on it through the max point, so $\\nabla f$ is perpendicular to every direction in the tangent plane. So is $\\nabla g$ (Sep 21). The vectors perpendicular to a plane all lie along one line, so again $\\nabla f = \\lambda \\nabla g$. For example, maximize $f = xyz$ with $x + y + z = 3$ and $x, y, z > 0$: the equations $yz = \\lambda$, $xz = \\lambda$, $xy = \\lambda$ force $x = y = z$ (divide pairs, which is safe since all are positive), so $x = y = z = 1$ and the max is $f = 1$.
 
 **What $\\lambda$ means.** $\\lambda$ measures how fast the best value of $f$ changes if you loosen the constraint $c$. You won't need that on the exam.
 :::

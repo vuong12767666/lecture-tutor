@@ -25,6 +25,10 @@ Split the time interval into short steps of length $\\Delta t$. During one step 
 $$ds = \\lVert \\mathbf r'(t) \\rVert\\, dt.$$
 
 **The answer doesn't depend on how you trace the curve.** The segment from $(0,0)$ to $(3,4)$ can also be traced as $\\langle 3t^2, 4t^2 \\rangle$, $0 \\le t \\le 1$. Now $\\lVert \\mathbf r' \\rVert = \\lVert \\langle 6t, 8t \\rangle \\rVert = 10t$, and $\\int_0^1 10t\\, dt = 5$, the same answer.
+
+**Why.** Tracing the curve differently changes the speed and the time spent by matching factors. Precisely: say the new tracing is $\\mathbf r(\\varphi(u))$, where $t = \\varphi(u)$ is increasing, so the curve is still traced once in the same direction. By the chain rule its velocity is $\\mathbf r'(\\varphi(u))\\,\\varphi'(u)$, so its speed is $\\lVert \\mathbf r'(\\varphi(u)) \\rVert\\, \\varphi'(u)$. Substituting $t = \\varphi(u)$, $dt = \\varphi'(u)\\, du$ turns its length integral back into the original one:
+$$\\int \\lVert \\mathbf r'(\\varphi(u)) \\rVert\\, \\varphi'(u)\\, du = \\int \\lVert \\mathbf r'(t) \\rVert\\, dt.$$
+In the example, the original tracing is $\\langle 3t, 4t \\rangle$ with speed $5$, and the new one replaces $t$ with $t^2$. The new speed $10t$ is $5$ times $\\frac{d}{dt}t^2 = 2t$.
 +++
 **The arc length function.** $s(t) = \\displaystyle\\int_a^t \\lVert \\mathbf r'(u) \\rVert\\, du$ is the distance traveled from the start by time $t$. Its derivative is $\\dfrac{ds}{dt} = \\lVert \\mathbf r'(t) \\rVert$, the speed. That's just "distance changes at the rate of your speed."
 
@@ -45,16 +49,18 @@ $$L = \\int_0^1 (e^t + e^{-t})\\, dt = \\Big[e^t - e^{-t}\\Big]_0^1 = e - \\frac
 The [[scalar line integral]] of $f$ along $C$ adds up $f \\times$ (length of each tiny piece):
 $$\\int_C f\\, ds = \\int_a^b f(\\mathbf r(t))\\, \\lVert \\mathbf r'(t) \\rVert\\, dt.$$
 
+**Where the formula comes from.** Chop $C$ into short pieces of length $\\Delta s_i$ and pick a point $P_i$ on each. On a short piece $f$ barely changes, so the piece contributes about $f(P_i)\\, \\Delta s_i$, and $\\sum f(P_i)\\, \\Delta s_i$ approximates the total. Shrinking the pieces gives $\\int_C f\\, ds$. To compute it, switch to $t$: a piece traced during a time $\\Delta t$ has length $\\Delta s \\approx \\lVert \\mathbf r'(t) \\rVert\\, \\Delta t$ (Oct 2), which is why the speed appears in the formula.
+
 **Recipe:** (1) parametrize $C$, (2) replace $x, y, z$ in $f$ by the components of $\\mathbf r(t)$, (3) multiply by the speed $\\lVert \\mathbf r'(t) \\rVert$, (4) integrate over the $t$-range.
 
-**Meanings:**
-- $f = 1$: the length of $C$.
-- $f$ = density: the **mass** of a wire shaped like $C$.
-- $f \\ge 0$ and $C$ in the $xy$-plane: the area of the vertical surface standing on $C$ whose height above each point $(x, y)$ of $C$ is $f(x, y)$.
-+++
-**Where the formula comes from.** Chop $C$ into pieces of length $\\Delta s_i$ and pick a point $P_i$ on each. Then $\\sum f(P_i)\\, \\Delta s_i$ approximates the total, and in the limit you get $\\int_C f\\, ds$. Changing to $t$: a piece traced in time $\\Delta t$ has length $\\Delta s \\approx \\lVert \\mathbf r'(t) \\rVert\\, \\Delta t$, which is why the speed shows up.
+**Meanings**, each from the sum $\\sum f(P_i)\\, \\Delta s_i$:
+- $f = 1$: the sum adds up the lengths of the pieces, so it's the length of $C$.
+- $f$ = density (mass per unit length): each piece has mass about $f(P_i)\\, \\Delta s_i$, so the total is the **mass** of a wire shaped like $C$.
+- $f \\ge 0$ and $C$ in the $xy$-plane: take the vertical surface standing on $C$ whose height above each point $(x, y)$ of $C$ is $f(x, y)$. Over one piece it's nearly a rectangle with base $\\Delta s_i$ and height $f(P_i)$, so the total is that surface's area.
 
-**Direction doesn't matter.** Tracing $C$ backward doesn't change any piece's length or the value of $f$ on it, so $\\int_C f\\, ds$ is the same either way. (That will **not** be true for the vector line integrals on Oct 7.)
+**Direction doesn't matter.** Tracing $C$ backward passes over the same pieces, with the same lengths and the same values of $f$, so the sum is the same. (That will **not** be true for the vector line integrals on Oct 7.)
++++
+**A check with numbers.** Take the quarter circle in the next example, where the exact answer is $\\int_C (x + y^2)\\, ds = 1 + \\tfrac\\pi4 \\approx 1.7854$. Split it into $4$ equal arcs of length $\\tfrac\\pi8$ and use each arc's middle point as $P_i$: the sum is about $1.7919$. With $20$ arcs, it's about $1.7857$. The sums close in on the integral as the pieces shrink.
 :::
 
 :::example Along a quarter circle
@@ -93,11 +99,11 @@ It stays the same. $ds$ is a length, which is always positive, so the direction 
 :::
 
 :::idea Mass and average value
-**Mass of a wire** with density $\\rho(x,y,z)$: $\\displaystyle m = \\int_C \\rho\\, ds$.
+**Mass of a wire** with density $\\rho(x,y,z)$: $\\displaystyle m = \\int_C \\rho\\, ds$. Density is mass per unit length, so a piece of length $\\Delta s$ has mass about $\\rho\\, \\Delta s$, and adding the pieces gives the integral.
 
-**Average value of $f$ along $C$:** $\\displaystyle \\frac{1}{L}\\int_C f\\, ds$, the total divided by the length.
+**Average value of $f$ along $C$:** $\\displaystyle \\frac{1}{L}\\int_C f\\, ds$, the total divided by the length. Why: the average is the constant value that would give the same total. If $f$ were a constant $\\bar f$, the total would be $\\int_C \\bar f\\, ds = \\bar f L$. Setting $\\bar f L = \\int_C f\\, ds$ and solving gives the formula, just like Calc I's $\\frac{1}{b - a}\\int_a^b f\\, dx$.
 
-**Sanity check for any mass problem.** The mass must be between (smallest density) $\\times\\, L$ and (largest density) $\\times\\, L$.
+**Sanity check for any mass problem.** The mass must be between (smallest density) $\\times\\, L$ and (largest density) $\\times\\, L$. Why: at every point $\\rho_{\\min} \\le \\rho \\le \\rho_{\\max}$, so the integrals satisfy $\\int_C \\rho_{\\min}\\, ds \\le \\int_C \\rho\\, ds \\le \\int_C \\rho_{\\max}\\, ds$, which is $\\rho_{\\min} L \\le m \\le \\rho_{\\max} L$.
 +++
 **Example: average height on a helix.** On the helix above, $\\int_C z\\, ds = 2\\sqrt2\\,\\pi^2$ and $L = \\int_0^{2\\pi} \\sqrt2\\, dt = 2\\sqrt2\\,\\pi$. So the average height is $\\dfrac{2\\sqrt2\\,\\pi^2}{2\\sqrt2\\,\\pi} = \\pi$. That makes sense: the helix rises steadily from $z = 0$ to $z = 2\\pi$ at constant speed, so it spends equal length at every height, and the average is the midpoint, $\\pi$.
 :::

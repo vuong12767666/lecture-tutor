@@ -30,11 +30,11 @@ How do you describe a curve in space with one parameter? And what do its derivat
 A [[vector function]] $\\mathbf r(t) = \\langle x(t),\\, y(t),\\, z(t) \\rangle$ gives a point for each $t$. As $t$ runs, the point traces a curve, like the path of a moving particle.
 
 **Standard parametrizations to know:**
-- **Line** through $P$ in direction $\\mathbf v$: $\\mathbf r(t) = P + t\\mathbf v$.
-- **Segment** from $P$ to $Q$: $\\mathbf r(t) = P + t(Q - P)$ for $0 \\le t \\le 1$.
-- **Circle** of radius $a$ centered at $(h, k)$: $\\langle h + a\\cos t,\\; k + a\\sin t \\rangle$ for $0 \\le t \\le 2\\pi$.
-- **Helix:** $\\langle a\\cos t,\\; a\\sin t,\\; bt \\rangle$, a circle that rises as it turns.
-- **Where two surfaces meet:** parametrize the simpler one (often a cylinder, using $\\cos$ and $\\sin$), then solve the other equation for the last coordinate.
+- **Line** through $P$ in direction $\\mathbf v$: $\\mathbf r(t) = P + t\\mathbf v$. Every point on the line is $P$ plus some multiple of $\\mathbf v$, and $t$ is that multiple.
+- **Segment** from $P$ to $Q$: $\\mathbf r(t) = P + t(Q - P)$ for $0 \\le t \\le 1$. At $t = 0$ it's at $P$, at $t = 1$ it's at $P + (Q - P) = Q$, and in between it moves straight along $Q - P$.
+- **Circle** of radius $a$ centered at $(h, k)$: $\\langle h + a\\cos t,\\; k + a\\sin t \\rangle$ for $0 \\le t \\le 2\\pi$. Every point has $(x - h)^2 + (y - k)^2 = a^2(\\cos^2 t + \\sin^2 t) = a^2$, so it's at distance $a$ from the center.
+- **Helix:** $\\langle a\\cos t,\\; a\\sin t,\\; bt \\rangle$. The first two coordinates go around a circle of radius $a$ while $z = bt$ rises at a steady rate.
+- **Where two surfaces meet:** parametrize the simpler one (often a cylinder, using $\\cos$ and $\\sin$), then solve the other equation for the last coordinate. Each point is on the first surface because of how you parametrized it, and on the second because you solved its equation.
 +++
 **One curve, many parametrizations.** $\\langle \\cos t, \\sin t \\rangle$ for $0 \\le t \\le 2\\pi$ and $\\langle \\cos 2t, \\sin 2t \\rangle$ for $0 \\le t \\le \\pi$ trace the same circle, the second one twice as fast. $\\langle \\cos t, -\\sin t \\rangle$ traces it clockwise. Exam answers that ask you to parametrize a curve usually accept any correct one, as long as it covers the curve the right number of times.
 
@@ -68,14 +68,16 @@ $P + t(Q - P)$ with $Q - P = \\langle 2, 4, 0 \\rangle$ gives $\\langle 1 + 2t,\
 :::idea Derivatives and tangent vectors
 Differentiate a vector function **component by component**: $\\mathbf r'(t) = \\langle x'(t),\\, y'(t),\\, z'(t) \\rangle$.
 
-**Meaning.** $\\mathbf r'(t)$ is a **tangent vector**: it points along the curve in the direction of motion.
+**Why component by component.** The derivative is defined just as in Calc I:
+$$\\mathbf r'(t) = \\lim_{h\\to0} \\frac{\\mathbf r(t + h) - \\mathbf r(t)}{h} = \\lim_{h\\to0} \\left\\langle \\frac{x(t+h) - x(t)}{h},\\; \\frac{y(t+h) - y(t)}{h},\\; \\frac{z(t+h) - z(t)}{h} \\right\\rangle.$$
+Subtracting two vectors and dividing by $h$ both happen one component at a time, and a vector approaches a limit exactly when each of its components does. Each component's limit is an ordinary derivative.
 
-- **Unit tangent:** $\\mathbf T(t) = \\dfrac{\\mathbf r'(t)}{\\lVert \\mathbf r'(t) \\rVert}$.
-- **Tangent line** at $t_0$: $\\mathbf r(t_0) + s\\,\\mathbf r'(t_0)$.
+**Why it's tangent.** The top, $\\mathbf r(t + h) - \\mathbf r(t)$, is the arrow from the point at time $t$ to a nearby point on the curve: a secant. Dividing by $h > 0$ keeps its direction. As $h \\to 0$, the nearby point slides toward $\\mathbf r(t)$, and the secant's direction becomes the tangent direction. So $\\mathbf r'(t)$ is a **tangent vector**, pointing along the curve in the direction of motion (as long as $\\mathbf r'(t) \\neq \\mathbf 0$).
+
+- **Unit tangent:** $\\mathbf T(t) = \\dfrac{\\mathbf r'(t)}{\\lVert \\mathbf r'(t) \\rVert}$, the same direction with length $1$.
+- **Tangent line** at $t_0$: $\\mathbf r(t_0) + s\\,\\mathbf r'(t_0)$, which starts at the point and goes in the tangent direction.
 +++
-**Why it's tangent.** $\\mathbf r'(t) = \\lim_{h\\to0} \\dfrac{\\mathbf r(t + h) - \\mathbf r(t)}{h}$. The top is the arrow from one point on the curve to a nearby one, a secant. Dividing by $h$ and shrinking $h$ turns the secant into the tangent direction.
-
-**A useful fact.** If $\\lVert \\mathbf r(t) \\rVert$ is constant (the curve stays on a sphere or circle around the origin), then $\\mathbf r'(t) \\perp \\mathbf r(t)$. Differentiate $\\mathbf r \\cdot \\mathbf r = \\text{constant}$ to get $2\\,\\mathbf r \\cdot \\mathbf r' = 0$. On a circle, the velocity is always perpendicular to the radius.
+**A useful fact.** If $\\lVert \\mathbf r(t) \\rVert$ is constant (the curve stays on a sphere or circle around the origin), then $\\mathbf r'(t) \\perp \\mathbf r(t)$. Why: $\\mathbf r \\cdot \\mathbf r = x^2 + y^2 + z^2$ is constant, so its derivative $2xx' + 2yy' + 2zz' = 2\\,\\mathbf r \\cdot \\mathbf r'$ is $0$. On a circle, the velocity is always perpendicular to the radius.
 :::
 
 :::figure velocity-ellipse
@@ -103,8 +105,12 @@ $\\mathbf r'(t) = \\langle 3,\\; 4\\cos t,\\; 2e^{2t} \\rangle$, so $\\mathbf r'
 The length of a curve from $t = a$ to $t = b$ is
 $$L = \\int_a^b \\lVert \\mathbf r'(t) \\rVert\\, dt = \\int_a^b \\sqrt{x'(t)^2 + y'(t)^2 + z'(t)^2}\\; dt.$$
 
-**Intuition.** $\\lVert \\mathbf r'(t) \\rVert$ is the speed, and distance $=$ speed $\\times$ time, added up.
+**Why.** Chop the time interval into short steps of length $\\Delta t$. During one step, each coordinate changes by about its rate times the time: $\\Delta x \\approx x'(t)\\,\\Delta t$, $\\Delta y \\approx y'(t)\\,\\Delta t$, $\\Delta z \\approx z'(t)\\,\\Delta t$. Over such a short step the curve is nearly straight, so by the distance formula (Pythagoras in 3D) that piece has length about
+$$\\sqrt{(\\Delta x)^2 + (\\Delta y)^2 + (\\Delta z)^2} \\approx \\sqrt{x'(t)^2 + y'(t)^2 + z'(t)^2}\\;\\Delta t = \\lVert \\mathbf r'(t) \\rVert\\, \\Delta t.$$
+Adding up the pieces and letting $\\Delta t \\to 0$ turns the sum into the integral. In words: $\\lVert \\mathbf r'(t) \\rVert$ is the speed, and the length is speed times time, added up.
 +++
+**A check with numbers.** For one turn of the helix in the example below, connect the points at $t = 0, \\tfrac{2\\pi}{10}, \\tfrac{4\\pi}{10}, \\dots, 2\\pi$ with $10$ straight segments: their total length is about $13.866$. With $100$ segments, it's about $14.048$. The integral gives $2\\pi\\sqrt5 \\approx 14.050$. The straight pieces get closer to the curve as they get shorter, which is exactly the limit above.
+
 **Exam tip: perfect squares.** Arc-length problems are designed so the square root simplifies. If the expression under the square root can be rewritten as $a^2 + 2ab + b^2$, then the square root is just $a + b$. For example, $\\lVert \\mathbf r' \\rVert^2 = 4t^2 + 4 + \\frac{1}{t^2} = \\left(2t + \\frac1t\\right)^2$.
 
 **Length doesn't depend on the parametrization.** Tracing the same curve faster makes $\\lVert \\mathbf r' \\rVert$ bigger but the time interval shorter by the same factor, so the integral comes out the same (as long as you trace it once).
@@ -129,8 +135,14 @@ For a particle at position $\\mathbf r(t)$:
 - **velocity** $\\mathbf v(t) = \\mathbf r'(t)$, a vector
 - **[[speed]]** $\\lVert \\mathbf v(t) \\rVert$, a number
 - **acceleration** $\\mathbf a(t) = \\mathbf v'(t) = \\mathbf r''(t)$, a vector
+
+**Why $\\lVert \\mathbf v \\rVert$ is the speed.** $\\lVert \\mathbf r(t + h) - \\mathbf r(t) \\rVert$ is the straight-line distance covered between times $t$ and $t + h$. Dividing by $h$ gives the average speed over that short time, and as $h \\to 0$ it becomes $\\lVert \\mathbf r'(t) \\rVert$.
+
+**Why constant speed doesn't mean zero acceleration.** If the speed is constant, then $\\mathbf v \\cdot \\mathbf v = \\lVert \\mathbf v \\rVert^2$ is constant, so its derivative is $0$. Differentiating $v_1^2 + v_2^2 + v_3^2$ term by term gives
+$$\\frac{d}{dt}(\\mathbf v \\cdot \\mathbf v) = 2v_1 v_1' + 2v_2 v_2' + 2v_3 v_3' = 2\\,\\mathbf v \\cdot \\mathbf a = 0.$$
+So at constant speed the acceleration is **perpendicular** to the velocity. It doesn't speed the particle up or slow it down; it only changes its direction. It's zero only when the direction never changes.
 +++
-**Constant speed doesn't mean zero acceleration.** Acceleration measures any change in velocity, including a change in *direction*. For example, $\\mathbf r(t) = \\langle \\cos t, \\sin t \\rangle$ has speed $\\lVert \\mathbf r'(t) \\rVert = 1$ at every time, but $\\mathbf a(t) = \\langle -\\cos t, -\\sin t \\rangle = -\\mathbf r(t)$, a vector of length $1$ pointing from the particle straight to the center. The example below shows the same thing on a helix.
+**A circle.** Acceleration measures any change in velocity, including a change in *direction*. For example, $\\mathbf r(t) = \\langle \\cos t, \\sin t \\rangle$ has speed $\\lVert \\mathbf r'(t) \\rVert = 1$ at every time, but $\\mathbf a(t) = \\langle -\\cos t, -\\sin t \\rangle = -\\mathbf r(t)$, a vector of length $1$ pointing from the particle straight to the center. The example below shows the same thing on a helix.
 :::
 
 :::example Steady speed, turning
@@ -139,6 +151,8 @@ $\\mathbf r(t) = \\langle \\cos 2t,\\; \\sin 2t,\\; 3t \\rangle$, a helix.
 $\\mathbf v = \\langle -2\\sin 2t,\\; 2\\cos 2t,\\; 3 \\rangle$, so the speed is $\\sqrt{4 + 9} = \\sqrt{13}$, constant.
 
 $\\mathbf a = \\langle -4\\cos 2t,\\; -4\\sin 2t,\\; 0 \\rangle$. That's not zero: it points horizontally toward the helix's axis, turning the particle.
+
+**Check that $\\mathbf a \\perp \\mathbf v$**, as constant speed requires: $\\mathbf v \\cdot \\mathbf a = 8\\sin 2t\\cos 2t - 8\\cos 2t\\sin 2t + 0 = 0$. ✓
 :::
 
 :::check

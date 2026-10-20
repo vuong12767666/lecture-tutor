@@ -26,13 +26,15 @@ On a whole region, where is $f$ biggest and smallest? And how do you make sure y
 - **Closed:** the region includes all of its boundary (think $\\le$, not $<$).
 - **Bounded:** it fits inside some disk.
 
-If either condition fails, a max or min might not exist.
-+++
-**Why both conditions matter.** For $f = x$:
+**Why each condition is needed.** Take $f = x$:
 
-- On the **open** disk $x^2 + y^2 < 1$, $f$ gets as close to $1$ as you like but never reaches it, since the boundary point $(1, 0)$ isn't included. No max.
-- On the **unbounded** half-plane $x \\ge 0$, $f$ grows forever. No max.
-- On the **closed, bounded** disk $x^2 + y^2 \\le 1$, the max is $1$ at $(1, 0)$, as guaranteed.
+- On the **open** disk $x^2 + y^2 < 1$, $f$ takes the values $0.9$, $0.99$, $0.999$, and so on, but never $1$, because the boundary point $(1, 0)$ isn't included. Every value is beaten by a bigger one, so there's no max.
+- On the **unbounded** half-plane $x \\ge 0$, $f$ grows forever, so there's no max.
+- On the **closed, bounded** disk $x^2 + y^2 \\le 1$, the max is $1$ at $(1, 0)$, as the theorem promises.
+
+Proving that the two conditions are *enough* takes a real analysis course (it depends on the real numbers having no gaps), so this course takes that part as given.
++++
+**Continuity is needed too.** On the closed, bounded disk $x^2 + y^2 \\le 1$, let $f = \\dfrac{1}{x^2 + y^2}$ except $f(0, 0) = 0$. Near the origin $f$ is as large as you like ($f = 100$ at distance $0.1$, $f = 10{,}000$ at distance $0.01$), so it has no max. The theorem doesn't apply because $f$ isn't continuous at the origin.
 :::
 
 :::check
@@ -55,10 +57,16 @@ To find the absolute max and min of $f$ on a closed, bounded region $R$:
 2. **Boundary:** find the largest and smallest values of $f$ on the boundary. Turn each edge into a one-variable problem by substituting or parametrizing, and include the corners or endpoints.
 3. **Compare:** the biggest value from steps 1 and 2 is the absolute max, and the smallest is the absolute min.
 
-You **don't** need the second derivative test here. Just comparing the values tells you which is the max and which is the min.
-+++
-**Why this catches everything.** An absolute extreme is somewhere in $R$. If it's in the interior, it's a local extreme too, so it's a critical point (step 1). If it's on the boundary, step 2 finds it. Then step 3 picks the winner.
+**Why this can't miss the answer.** The Extreme Value Theorem says the absolute max is at some point $P$ of $R$. $P$ is either inside $R$ or on its boundary:
+- **Inside.** Every point near $P$ is also in $R$, and $f(P)$ beats all of them, so $P$ is a local max. Local maxes inside a region happen only at critical points (Sep 21), so $P$ is on step 1's list.
+- **On the boundary.** $f(P)$ beats every other boundary point, so $P$ is where step 2 finds the boundary's largest value.
 
+Either way $P$ is on the list of candidates. Since $f(P)$ beats every point of $R$, it's the biggest candidate, which is what step 3 picks. The same reasoning works for the min.
+
+**Why the corners.** On one straight edge, $f$ becomes a function of one variable on a closed interval. Calc I says its extremes are at critical points or at the interval's **endpoints**, and an edge's endpoints are the region's corners.
+
+**Why no second derivative test.** That test only describes $f$ *near* one point. The question here is which candidate is biggest over all of $R$, and comparing values answers it directly.
++++
 **Circular boundaries.** On a circle, either substitute (as in the first example below) or parametrize $x = r\\cos t$, $y = r\\sin t$. Or use Lagrange multipliers (Sep 30).
 :::
 
