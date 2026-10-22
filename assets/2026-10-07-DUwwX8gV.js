@@ -59,7 +59,7 @@ For example, $\\mathbf F = \\langle -y, x \\rangle$ at $(1, 0)$ is $\\langle 0, 
 
 **Checking a proposed flowline:** compute $\\mathbf r'(t)$, compute $\\mathbf F(\\mathbf r(t))$, and check they're equal for **every** $t$.
 
-**Finding $\\mathbf r(t)$ from a point, a field, and a time.** A common exam question tells you a particle follows $\\mathbf F$ and is at the point $P$ at time $t_0$. It then asks either for an estimate of where the particle is at a nearby time, or for the exact formula $\\mathbf r(t)$.
+**Finding $\\mathbf r(t)$ from a point, a field, and a time.** A common exam question tells you a particle follows $\\mathbf F$ and is at the point $P$ at time $t_0$. It then asks either for an estimate of where the particle is at a nearby time, or for the exact formula $\\mathbf r(t)$ (next section).
 
 *Estimating.* For a small time step $h$,
 $$\\mathbf r(t_0 + h) \\approx \\mathbf r(t_0) + h\\,\\mathbf r'(t_0) = P + h\\,\\mathbf F(P).$$
@@ -67,16 +67,8 @@ Why: $\\mathbf r'(t_0)$ is the limit of $\\dfrac{\\mathbf r(t_0 + h) - \\mathbf 
 
 For example, $\\mathbf F = \\langle y,\\; x^2 + 1 \\rangle$, with the particle at $(2, 1)$ when $t = 3$. Then $\\mathbf F(2, 1) = \\langle 1, 5 \\rangle$, so
 $$\\mathbf r(3.1) \\approx (2, 1) + 0.1\\,\\langle 1, 5 \\rangle = (2.1,\\; 1.5), \\qquad \\mathbf r(2.9) \\approx (2, 1) - 0.1\\,\\langle 1, 5 \\rangle = (1.9,\\; 0.5).$$
-
-*Finding the exact formula.* If each component's equation involves only its own variable, solve each one on its own. Take $\\mathbf F = \\langle x,\\; -2y \\rangle$, with the particle at $(3, 1)$ when $t = 2$. A flowline needs $x' = x$ and $y' = -2y$.
-- **Which functions satisfy $x' = kx$?** Exactly $x = Ce^{kt}$. Why: $\\big(x e^{-kt}\\big)' = (x' - kx)\\, e^{-kt} = 0$, so $x e^{-kt}$ is a constant $C$.
-- So $x = Ae^{t}$ and $y = Be^{-2t}$. Fit the point **at $t = 2$**, not $t = 0$: $Ae^{2} = 3$ gives $A = 3e^{-2}$, and $Be^{-4} = 1$ gives $B = e^{4}$.
-$$\\mathbf r(t) = \\big\\langle 3e^{t - 2},\\; e^{-2(t - 2)} \\big\\rangle.$$
-**Check.** $\\mathbf r(2) = (3, 1)$ ✓, and $\\mathbf r'(t) = \\langle 3e^{t-2},\\; -2e^{-2(t-2)} \\rangle = \\langle x,\\; -2y \\rangle$ ✓.
 +++
 **How good is the estimate?** For $\\mathbf F = \\langle y,\\; x^2 + 1 \\rangle$ starting at $(2, 1)$ at $t = 3$, a computer following the field in tiny steps finds the particle at about $(2.13,\\; 1.52)$ at $t = 3.1$. The one-step estimate $(2.1, 1.5)$ is close. It's a little off because the field changes as the particle moves, which a single step ignores. Smaller steps get closer: two steps of $0.05$, recomputing $\\mathbf F$ at each new point, give about $(2.11,\\; 1.51)$, and ten steps of $0.01$ give about $(2.12,\\; 1.52)$.
-
-**When the components are mixed.** For $\\mathbf F = \\langle -y, x \\rangle$, $x' = -y$ involves $y$, so you can't solve one coordinate at a time. Use the known flowlines instead: circles traced counterclockwise at angular speed $1$, so $\\mathbf r(t) = \\langle R\\cos(t + c),\\; R\\sin(t + c) \\rangle$. If the particle is at $(0, 2)$ when $t = 1$, then $R = 2$ and $1 + c = \\tfrac\\pi2$, which gives $\\mathbf r(t) = \\langle -2\\sin(t - 1),\\; 2\\cos(t - 1) \\rangle$. Check: $\\mathbf r(1) = (0, 2)$ ✓, and $\\mathbf r' = \\langle -2\\cos(t - 1),\\; -2\\sin(t - 1) \\rangle = \\langle -y, x \\rangle$ ✓.
 
 **Two examples.**
 - For $\\mathbf F = \\langle -y, x \\rangle$, try $\\mathbf r = \\langle \\cos t, \\sin t \\rangle$: $\\mathbf r' = \\langle -\\sin t, \\cos t \\rangle$ and $\\mathbf F(\\mathbf r) = \\langle -\\sin t, \\cos t \\rangle$. ✓ The flowlines are circles.
@@ -114,6 +106,46 @@ $\\mathbf F(1, 3) = \\langle 1 \\cdot 3,\\; 1 - 3 \\rangle = \\langle 3, -2 \\ra
 $$\\mathbf r(2.1) \\approx (1, 3) + 0.1\\,\\langle 3, -2 \\rangle = (1.3,\\; 2.8).$$
 :::
 
+:::idea Finding a flowline's exact formula
+**Step 1: write $\\mathbf r'(t) = \\mathbf F(\\mathbf r(t))$ one coordinate at a time.** With $\\mathbf r(t) = \\langle x(t), y(t) \\rangle$ and $\\mathbf F = \\langle P, Q \\rangle$, the vector equation says two things at once:
+$$x'(t) = P\\big(x(t), y(t)\\big), \\qquad y'(t) = Q\\big(x(t), y(t)\\big).$$
+The left side of each is how fast one coordinate of the particle is changing. The right side is that part of the arrow at the particle's current position.
+
+Take $\\mathbf F = \\langle x,\\; -2y \\rangle$. Here $P = x$ and $Q = -2y$, so a flowline must satisfy
+$$x'(t) = x(t), \\qquad y'(t) = -2\\,y(t).$$
+These aren't extra rules. They're just what $\\mathbf r' = \\mathbf F(\\mathbf r)$ says for this field. For instance, when the particle is at $(3, 1)$, the arrow there is $\\mathbf F(3, 1) = \\langle 3, -2 \\rangle$, so at that moment $x$ is increasing at rate $3$ (equal to $x$) and $y$ is decreasing at rate $2$ (twice $y$).
+
+Both equations have the form $x' = kx$: the rate of change is $k$ times the current value, with $k = 1$ for $x$ and $k = -2$ for $y$. Each one involves only its own coordinate, so you can solve them one at a time.
+
+**Step 2: the functions with $x' = kx$ are exactly $x = Ce^{kt}$.** Two parts:
+- *These work.* By the chain rule, $\\dfrac{d}{dt}\\big(Ce^{kt}\\big) = k\\,Ce^{kt}$, which is $k$ times the function itself. That's $x' = kx$.
+- *Nothing else works.* Suppose $x(t)$ is any function with $x' = kx$. Divide it by $e^{kt}$: let $u(t) = x(t)\\,e^{-kt}$. By the product rule,
+$$u'(t) = x'(t)\\,e^{-kt} - k\\,x(t)\\,e^{-kt} = \\big(x'(t) - k\\,x(t)\\big)\\,e^{-kt} = 0,$$
+because $x' - kx = 0$. A function whose derivative is $0$ at every time is constant (Calc I), so $u(t) = C$ for some number $C$, which means $x(t) = Ce^{kt}$.
+
+**Step 3: fit the given point at the given time.** If $x = x_0$ when $t = t_0$, then $Ce^{kt_0} = x_0$, so $C = x_0\\,e^{-kt_0}$, and
+$$x(t) = x_0\\, e^{k(t - t_0)}.$$
+At $t = t_0$ the exponent is $0$ and $e^0 = 1$, so $x = x_0$, as required. Fitting at $t = 0$ instead of $t_0$ is the most common mistake.
+
+**The whole example.** $\\mathbf F = \\langle x,\\; -2y \\rangle$, with the particle at $(3, 1)$ when $t = 2$:
+- $x' = x$, so $k = 1$, and $x = 3$ at $t = 2$: $\\;x(t) = 3e^{t - 2}$.
+- $y' = -2y$, so $k = -2$, and $y = 1$ at $t = 2$: $\\;y(t) = e^{-2(t - 2)}$.
+$$\\mathbf r(t) = \\big\\langle 3e^{t - 2},\\; e^{-2(t - 2)} \\big\\rangle.$$
+**Check.** $\\mathbf r(2) = (3, 1)$ ✓, and $\\mathbf r'(t) = \\langle 3e^{t-2},\\; -2e^{-2(t-2)} \\rangle = \\langle x,\\; -2y \\rangle$ ✓.
++++
+**Where $e$ comes from, with numbers.** Take $x' = x$ with $x = 3$ at $t = 2$, and use the estimate from the last section over and over. One step of length $h$ gives $x(t + h) \\approx x(t) + h\\,x'(t) = x(t) + h\\,x(t) = (1 + h)\\,x(t)$, so each step multiplies $x$ by $1 + h$. Going from $t = 2$ to $t = 3$:
+
+| steps | each step multiplies $x$ by | estimate of $x(3)$ |
+|---|---|---|
+| $10$ | $1.1$ | $3 \\times 1.1^{10} \\approx 7.78$ |
+| $100$ | $1.01$ | $3 \\times 1.01^{100} \\approx 8.11$ |
+| $1000$ | $1.001$ | $3 \\times 1.001^{1000} \\approx 8.15$ |
+
+The estimates close in on $3e \\approx 8.155$, which is what $x(t) = 3e^{t - 2}$ gives at $t = 3$. That's because $(1 + \\tfrac1n)^n$ gets closer and closer to $e$ as $n$ grows. So $e$ shows up because the rate is proportional to the current value: each small step grows $x$ by the same fraction.
+
+**When the components are mixed.** Step 1 doesn't always split. For $\\mathbf F = \\langle -y, x \\rangle$, it gives $x' = -y$ and $y' = x$: each equation involves the other coordinate, so you can't solve them one at a time. Use the known flowlines instead: circles traced counterclockwise at angular speed $1$, so $\\mathbf r(t) = \\langle R\\cos(t + c),\\; R\\sin(t + c) \\rangle$. If the particle is at $(0, 2)$ when $t = 1$, then $R = 2$ and $1 + c = \\tfrac\\pi2$, which gives $\\mathbf r(t) = \\langle -2\\sin(t - 1),\\; 2\\cos(t - 1) \\rangle$. Check: $\\mathbf r(1) = (0, 2)$ ✓, and $\\mathbf r' = \\langle -2\\cos(t - 1),\\; -2\\sin(t - 1) \\rangle = \\langle -y, x \\rangle$ ✓.
+:::
+
 :::check
 A particle follows a flowline of $\\mathbf F = \\langle 2x,\\; y \\rangle$ and is at $(1, 3)$ when $t = 1$. Which is $\\mathbf r(t)$?
 - [x] $\\big\\langle e^{2(t-1)},\\; 3e^{t-1} \\big\\rangle$
@@ -124,7 +156,7 @@ A particle follows a flowline of $\\mathbf F = \\langle 2x,\\; y \\rangle$ and i
 - [ ] $\\big\\langle 1 + 2(t - 1),\\; 3 + 3(t - 1) \\big\\rangle$
   why: That's the tangent-line estimate. Its velocity stays $\\langle 2, 3 \\rangle$, but $\\mathbf F(\\mathbf r(t)) = \\langle 2 + 4(t-1),\\; 3 + 3(t-1) \\rangle$ changes, so they only match at $t = 1$.
 ???
-The flowline needs $x' = 2x$ and $y' = y$, so $x = Ae^{2t}$ and $y = Be^{t}$. At $t = 1$: $Ae^2 = 1$ and $Be = 3$, so $x = e^{2(t-1)}$ and $y = 3e^{t-1}$.
+Write $\\mathbf r' = \\mathbf F(\\mathbf r)$ by coordinate: $x' = 2x$ ($k = 2$) and $y' = y$ ($k = 1$). With $x_0 e^{k(t - t_0)}$ and the point $(1, 3)$ at $t_0 = 1$: $x = e^{2(t-1)}$ and $y = 3e^{t-1}$.
 
 Check: $\\mathbf r(1) = (1, 3)$ ✓, and $\\mathbf r' = \\langle 2e^{2(t-1)},\\; 3e^{t-1} \\rangle = \\langle 2x,\\; y \\rangle$ ✓.
 :::
