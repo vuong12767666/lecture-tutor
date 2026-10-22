@@ -58,7 +58,26 @@ $$\\mathbf r'(t) = \\mathbf F(\\mathbf r(t)).$$
 For example, $\\mathbf F = \\langle -y, x \\rangle$ at $(1, 0)$ is $\\langle 0, 1 \\rangle$, so a flowline passing through $(1, 0)$ is moving straight up at that moment, at speed $1$.
 
 **Checking a proposed flowline:** compute $\\mathbf r'(t)$, compute $\\mathbf F(\\mathbf r(t))$, and check they're equal for **every** $t$.
+
+**Finding $\\mathbf r(t)$ from a point, a field, and a time.** A common exam question tells you a particle follows $\\mathbf F$ and is at the point $P$ at time $t_0$. It then asks either for an estimate of where the particle is at a nearby time, or for the exact formula $\\mathbf r(t)$.
+
+*Estimating.* For a small time step $h$,
+$$\\mathbf r(t_0 + h) \\approx \\mathbf r(t_0) + h\\,\\mathbf r'(t_0) = P + h\\,\\mathbf F(P).$$
+Why: $\\mathbf r'(t_0)$ is the limit of $\\dfrac{\\mathbf r(t_0 + h) - \\mathbf r(t_0)}{h}$, so for small $h$ the change in position is about $h\\,\\mathbf r'(t_0)$. That's the tangent line from Oct 2. On a flowline the velocity is the field, so $\\mathbf r'(t_0) = \\mathbf F(P)$, which you can compute from the point alone. Use a negative $h$ for an earlier time.
+
+For example, $\\mathbf F = \\langle y,\\; x^2 + 1 \\rangle$, with the particle at $(2, 1)$ when $t = 3$. Then $\\mathbf F(2, 1) = \\langle 1, 5 \\rangle$, so
+$$\\mathbf r(3.1) \\approx (2, 1) + 0.1\\,\\langle 1, 5 \\rangle = (2.1,\\; 1.5), \\qquad \\mathbf r(2.9) \\approx (2, 1) - 0.1\\,\\langle 1, 5 \\rangle = (1.9,\\; 0.5).$$
+
+*Finding the exact formula.* If each component's equation involves only its own variable, solve each one on its own. Take $\\mathbf F = \\langle x,\\; -2y \\rangle$, with the particle at $(3, 1)$ when $t = 2$. A flowline needs $x' = x$ and $y' = -2y$.
+- **Which functions satisfy $x' = kx$?** Exactly $x = Ce^{kt}$. Why: $\\big(x e^{-kt}\\big)' = (x' - kx)\\, e^{-kt} = 0$, so $x e^{-kt}$ is a constant $C$.
+- So $x = Ae^{t}$ and $y = Be^{-2t}$. Fit the point **at $t = 2$**, not $t = 0$: $Ae^{2} = 3$ gives $A = 3e^{-2}$, and $Be^{-4} = 1$ gives $B = e^{4}$.
+$$\\mathbf r(t) = \\big\\langle 3e^{t - 2},\\; e^{-2(t - 2)} \\big\\rangle.$$
+**Check.** $\\mathbf r(2) = (3, 1)$ ✓, and $\\mathbf r'(t) = \\langle 3e^{t-2},\\; -2e^{-2(t-2)} \\rangle = \\langle x,\\; -2y \\rangle$ ✓.
 +++
+**How good is the estimate?** For $\\mathbf F = \\langle y,\\; x^2 + 1 \\rangle$ starting at $(2, 1)$ at $t = 3$, a computer following the field in tiny steps finds the particle at about $(2.13,\\; 1.52)$ at $t = 3.1$. The one-step estimate $(2.1, 1.5)$ is close. It's a little off because the field changes as the particle moves, which a single step ignores. Smaller steps get closer: two steps of $0.05$, recomputing $\\mathbf F$ at each new point, give about $(2.11,\\; 1.51)$, and ten steps of $0.01$ give about $(2.12,\\; 1.52)$.
+
+**When the components are mixed.** For $\\mathbf F = \\langle -y, x \\rangle$, $x' = -y$ involves $y$, so you can't solve one coordinate at a time. Use the known flowlines instead: circles traced counterclockwise at angular speed $1$, so $\\mathbf r(t) = \\langle R\\cos(t + c),\\; R\\sin(t + c) \\rangle$. If the particle is at $(0, 2)$ when $t = 1$, then $R = 2$ and $1 + c = \\tfrac\\pi2$, which gives $\\mathbf r(t) = \\langle -2\\sin(t - 1),\\; 2\\cos(t - 1) \\rangle$. Check: $\\mathbf r(1) = (0, 2)$ ✓, and $\\mathbf r' = \\langle -2\\cos(t - 1),\\; -2\\sin(t - 1) \\rangle = \\langle -y, x \\rangle$ ✓.
+
 **Two examples.**
 - For $\\mathbf F = \\langle -y, x \\rangle$, try $\\mathbf r = \\langle \\cos t, \\sin t \\rangle$: $\\mathbf r' = \\langle -\\sin t, \\cos t \\rangle$ and $\\mathbf F(\\mathbf r) = \\langle -\\sin t, \\cos t \\rangle$. ✓ The flowlines are circles.
 - For $\\mathbf F = \\langle x, y \\rangle$, try $\\mathbf r = \\langle e^t, 2e^t \\rangle$: $\\mathbf r' = \\langle e^t, 2e^t \\rangle = \\mathbf F(\\mathbf r)$. ✓ The flowlines are rays heading outward, speeding up.
@@ -79,6 +98,35 @@ Which curve is a flowline of $\\mathbf F = \\langle 1,\\; 2x \\rangle$?
 For $\\langle t, t^2 \\rangle$: $\\mathbf r' = \\langle 1, 2t \\rangle$ and $\\mathbf F(\\mathbf r) = \\langle 1, 2t \\rangle$. ✓
 
 For $\\langle t, 2t \\rangle$: $\\mathbf r' = \\langle 1, 2 \\rangle$, but $\\mathbf F = \\langle 1, 2t \\rangle$, which only matches at $t = 1$.
+:::
+
+:::check
+A particle follows a flowline of $\\mathbf F = \\langle xy,\\; x - y \\rangle$ and is at $(1, 3)$ when $t = 2$. Estimate where it is when $t = 2.1$.
+- [x] $(1.3,\\; 2.8)$
+- [ ] $(4,\\; 1)$
+  why: That's $P + \\mathbf F(P)$, a step of a whole unit of time. The step is $h = 0.1$, so add $0.1\\,\\mathbf F(P)$.
+- [ ] $(0.3,\\; -0.2)$
+  why: That's only the change, $0.1\\,\\mathbf F(P)$. The new position is the starting point plus the change.
+- [ ] $(0.8,\\; 3.3)$
+  why: The components got swapped: $\\mathbf F(1, 3) = \\langle 3, -2 \\rangle$, not $\\langle -2, 3 \\rangle$.
+???
+$\\mathbf F(1, 3) = \\langle 1 \\cdot 3,\\; 1 - 3 \\rangle = \\langle 3, -2 \\rangle$, so
+$$\\mathbf r(2.1) \\approx (1, 3) + 0.1\\,\\langle 3, -2 \\rangle = (1.3,\\; 2.8).$$
+:::
+
+:::check
+A particle follows a flowline of $\\mathbf F = \\langle 2x,\\; y \\rangle$ and is at $(1, 3)$ when $t = 1$. Which is $\\mathbf r(t)$?
+- [x] $\\big\\langle e^{2(t-1)},\\; 3e^{t-1} \\big\\rangle$
+- [ ] $\\big\\langle e^{2t},\\; 3e^{t} \\big\\rangle$
+  why: This is at $(1, 3)$ when $t = 0$, but the particle has to be there when $t = 1$. At $t = 1$ this gives $(e^2, 3e)$.
+- [ ] $\\big\\langle e^{t-1},\\; 3e^{2(t-1)} \\big\\rangle$
+  why: The rates are swapped. $x' = 2x$ needs $e^{2(t-1)}$ in the first component.
+- [ ] $\\big\\langle 1 + 2(t - 1),\\; 3 + 3(t - 1) \\big\\rangle$
+  why: That's the tangent-line estimate. Its velocity stays $\\langle 2, 3 \\rangle$, but $\\mathbf F(\\mathbf r(t)) = \\langle 2 + 4(t-1),\\; 3 + 3(t-1) \\rangle$ changes, so they only match at $t = 1$.
+???
+The flowline needs $x' = 2x$ and $y' = y$, so $x = Ae^{2t}$ and $y = Be^{t}$. At $t = 1$: $Ae^2 = 1$ and $Be = 3$, so $x = e^{2(t-1)}$ and $y = 3e^{t-1}$.
+
+Check: $\\mathbf r(1) = (1, 3)$ ✓, and $\\mathbf r' = \\langle 2e^{2(t-1)},\\; 3e^{t-1} \\rangle = \\langle 2x,\\; y \\rangle$ ✓.
 :::
 
 :::idea Line integrals of vector fields

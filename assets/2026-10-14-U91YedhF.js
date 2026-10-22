@@ -86,6 +86,69 @@ On the plane minus the origin, which statement does **not** guarantee that $\\ma
 The cross-partials test needs a simply connected region, and the plane minus the origin has a hole. The swirl field is a counterexample. The other three statements are each equivalent to being conservative on any open, connected region.
 :::
 
+:::idea Deciding: conservative or not?
+On an exam, a field comes as a formula, a picture, or some integral values. Here's what to do with each, and why each step is valid.
+
+**Given a formula.**
+1. Compute the cross-partials: $P_y$ and $Q_x$ (in 3D, also $P_z$ vs $R_x$ and $Q_z$ vs $R_y$).
+2. If any pair differs anywhere in the region, it's **not conservative**. Why: a conservative field has $P = f_x$ and $Q = f_y$, so $P_y = f_{xy} = f_{yx} = Q_x$ at *every* point. One mismatch rules it out.
+3. If every pair matches, look at where $\\mathbf F$ is defined. If it's defined everywhere (built from polynomials, $e^x$, $\\sin$, $\\cos$), or on a region with no holes, it's **conservative**. Why: with no holes, matching cross-partials make every closed loop give $0$ (Oct 12). To be sure, find $f$ and check that $\\nabla f = \\mathbf F$.
+4. If every pair matches but $\\mathbf F$ is undefined somewhere, such as at the origin when you divide by $x^2 + y^2$, the test can't decide. Compute the integral around a loop circling that point. If it isn't $0$, it's **not conservative** (the swirl field gives $2\\pi$). If you can find one $f$ that works on the whole region, it's **conservative**.
+
+**Given a picture.**
+- **Read off the formula, then use the steps above.** Check easy points such as $(1, 0)$ and $(0, 1)$ to see which formula matches (Oct 7).
+- **Or find a loop the field pushes you around.** Suppose that around some closed loop, the arrows point the way you're going on some stretches and are perpendicular to your motion on the rest, never against it. Then every step's work $\\mathbf F \\cdot d\\mathbf r$ is $\\ge 0$, and some are $> 0$, so the loop integral is positive. A conservative field gives $0$ around every loop, so this one isn't conservative.
+
+A picture can prove a field is *not* conservative, but it can't prove one *is*: you can't check every loop by eye. When a question says "exactly one is conservative," rule out the others.
+
+**Given integral values.** If two paths with the same start and end give different values, or a closed loop gives anything other than $0$, it's **not conservative**. Why: a conservative field gives $f(B) - f(A)$ for every path from $A$ to $B$ (Oct 9). But values that agree for a few paths prove nothing, because "conservative" means *every* path agrees.
++++
+**One worked example for each outcome.**
+- $\\langle 2xy + 1,\\; x^2 \\rangle$: $P_y = 2x = Q_x$, defined everywhere, so conservative, with $f = x^2 y + x$.
+- $\\langle xy,\\; x^2 \\rangle$: $P_y = x$ but $Q_x = 2x$. They agree only on the line $x = 0$, so it's not conservative.
+- $\\langle -y, x \\rangle / (x^2 + y^2)$: the cross-partials match, but it's undefined at the origin, and the unit circle gives $2\\pi$. Not conservative.
+- $\\langle yz,\\; xz,\\; xy + 2z \\rangle$: $P_y = z = Q_x$, $P_z = y = R_x$, $Q_z = x = R_y$, defined everywhere, so conservative, with $f = xyz + z^2$.
+:::
+
+:::figure conservative-picture
+Left: $\\langle y, 0 \\rangle$ and a clockwise loop. Along the top edge you move right and the arrows point right. Along the bottom edge you move left and the arrows point left. On the two sides the arrows are horizontal while you move vertically, so they do no work there. The loop integral is positive, so $\\langle y, 0 \\rangle$ is **not** conservative, even though every arrow points straight left or right. Right: $\\langle x, y \\rangle$ and a circle. The arrows point straight out, perpendicular to the circle everywhere, so they do no work around it. That fits $\\langle x, y \\rangle = \\nabla\\big(\\tfrac{x^2 + y^2}{2}\\big)$, which is conservative.
+:::
+
+:::check
+Is $\\mathbf F = \\langle e^y,\\; x e^y + 2y \\rangle$ conservative on the whole plane?
+- [x] Yes
+- [ ] No, because $P_y \\neq Q_x$
+  why: $P_y = e^y$ and $Q_x = e^y$. They match.
+- [ ] Can't tell without computing a loop integral
+  why: A loop is only needed when the field is undefined somewhere. This one is defined everywhere, so the plane has no holes, and matching cross-partials settle it.
+???
+$P_y = e^y = Q_x$, and $\\mathbf F$ is defined on the whole plane, which has no holes. So it's conservative. A potential is $f = x e^y + y^2$: $f_x = e^y$ ✓ and $f_y = x e^y + 2y$ ✓.
+:::
+
+:::check
+In a picture of $\\mathbf F$, every arrow to the right of the $y$-axis points straight up, and every arrow to the left of it points straight down. You go once counterclockwise around a square centered at the origin. What does that tell you?
+- [x] The loop integral is positive, so $\\mathbf F$ is not conservative
+- [ ] The loop integral is $0$, so $\\mathbf F$ is conservative
+  why: On the right edge you move up and the arrows point up. On the left edge you move down and the arrows point down. Both push you along, and the top and bottom edges do no work (vertical arrows, horizontal motion). So it's positive. Also, $0$ around one loop wouldn't prove conservative; it has to be $0$ around every loop.
+- [ ] The loop integral is negative, so $\\mathbf F$ is not conservative
+  why: The arrows point the way you're going on both vertical edges, so the work there is positive.
+- [ ] You can't tell from a picture
+  why: A picture can't prove a field *is* conservative, but one loop with a nonzero integral proves it *isn't*.
+???
+The field pushes you along on both vertical edges and does no work on the horizontal ones, so the loop integral is positive. A conservative field would give $0$, so it isn't conservative. (A formula with this picture is $\\langle 0, x \\rangle$: $P_y = 0$ but $Q_x = 1$. Around the square $-1 \\le x, y \\le 1$, the loop integral is $4$.)
+:::
+
+:::check
+Along one path from $(0, 0)$ to $(1, 1)$, $\\int \\mathbf F \\cdot d\\mathbf r = 2$. Along a different path between the same points, it's also $2$. What can you conclude?
+- [ ] $\\mathbf F$ is conservative
+  why: Conservative means *every* pair of paths agrees. Two agreeing paths don't rule out a third that disagrees.
+- [ ] $\\mathbf F$ is not conservative
+  why: Nothing here disagrees. Two paths giving the same value is exactly what a conservative field would do.
+- [x] Nothing yet
+???
+Nothing yet. Agreement on two paths is consistent with being conservative but doesn't prove it. A *disagreement* would prove it isn't. To decide, use the formula test.
+:::
+
 :::idea Closed loops
 For a closed curve, $\\oint_C$ means the curve ends where it starts.
 
