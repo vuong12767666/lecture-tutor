@@ -4,10 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lecture Tutor</title>
-    <script type="module" crossorigin src="./assets/index-CwZTif1n.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CIMxA5Zq.css">
+    <!-- Sets a saved dark mode before the page first paints, so it never flashes light.
+         The key matches THEME_STORAGE_KEY in src/theme.ts. -->
+    <script>
+      try {
+        if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark";
+      } catch {
+        // Storage is blocked: stay in light mode.
+      }
+    </script>
+    <script type="module" crossorigin src="./assets/index-BScmn6cF.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CcNcqTdf.css">
   </head>
   <body>
+    <div class="page-tools">
+      <button id="theme-toggle" class="theme-toggle" type="button">Dark mode</button>
+    </div>
     <main id="app"></main>
   </body>
 </html>
