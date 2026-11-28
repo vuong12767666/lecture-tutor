@@ -10,21 +10,27 @@
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     <meta name="theme-color" content="#2f5fd0" />
     <meta name="apple-mobile-web-app-title" content="Lectures" />
-    <!-- Sets a saved dark mode before the page first paints, so it never flashes light.
-         The key matches THEME_STORAGE_KEY in src/theme.ts. -->
+    <!-- Sets a saved dark mode and text size before the page first paints, so neither flashes.
+         The keys match THEME_STORAGE_KEY in src/theme.ts and TEXT_SIZE_STORAGE_KEY in src/textSize.ts. -->
     <script>
       try {
         if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark";
+        // The text size step, matching TEXT_SCALES and TEXT_SIZE_STORAGE_KEY in src/textSize.ts.
+        var step = localStorage.getItem("text-size");
+        var scale = step === null ? undefined : [0.85, 1, 1.15, 1.3, 1.5][Number(step)];
+        if (scale) document.documentElement.style.setProperty("--text-scale", String(scale));
       } catch {
-        // Storage is blocked: stay in light mode.
+        // Storage is blocked: stay in light mode at the normal size.
       }
     </script>
-    <script type="module" crossorigin src="./assets/index-BmNt_pgT.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CGqbXL7u.css">
+    <script type="module" crossorigin src="./assets/index-CG1GAqp6.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C226rW6D.css">
   </head>
   <body>
     <div class="page-tools">
       <button id="theme-toggle" class="theme-toggle" type="button">Dark mode</button>
+      <button id="text-smaller" class="theme-toggle text-size" type="button" aria-label="Smaller text">A−</button>
+      <button id="text-larger" class="theme-toggle text-size" type="button" aria-label="Larger text">A+</button>
     </div>
     <main id="app"></main>
   </body>
