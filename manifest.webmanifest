@@ -1,0 +1,15 @@
+{
+  "name": "Lecture Tutor",
+  "short_name": "Lectures",
+  "description": "Lectures you can read instead of sitting in class, with check questions, practice tests, and a daily review.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fdfdfb",
+  "theme_color": "#2f5fd0",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
